@@ -1,0 +1,63 @@
+$color-light: #FFEB3B
+$color-dark: #FF9800
+
+*
+    margin: 0
+    padding: 0
+
+body
+
+.wrapper
+    position: relative
+    height: 100vh
+    background: linear-gradient(170deg, $color-light 0%, $color-dark 100%)
+    overflow: hidden
+
+.signInCard,.signUpCard
+    width: 370px
+    height: 600px
+    background: #fff
+    left: 22px
+    top: 24px
+    border-radius: 0 0 12px 12px
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2)
+    margin: auto
+    position: absolute
+    top: -500px
+    left: 50%
+    transform: translateX(-50%)
+    transition: all .2s ease-in-out
+    overflow: hidden
+    .tapArea
+        width: 100%
+        height: 60px
+        position: absolute
+        bottom: 0
+        .ring
+            width: 20px
+            height: 20px
+            border: 4px solid $color-dark
+            box-sizing: border-box
+            border-radius: 50%
+            position: absolute
+            top: 50%
+            left: 50%
+            transform: translate(-50%,-50%)
+        &:hover
+            background: rgba(#000,.05)
+            .ring
+                border: 5px solid $color-dark
+
+.signUpCard
+    border-radius: 12px 12px 0 0
+    margin: 0
+    top: initial
+    bottom: -500px
+    .tapArea
+        top: 0
+
+.signInOpen
+    top: 0px
+
+.signUpOpen
+    bottom: 0
