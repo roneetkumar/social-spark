@@ -1,3 +1,5 @@
+includeHTML();
+
 console.log('hello');
 const _ = ele => document.querySelector(ele)
 const __ = ele => document.querySelectorAll(ele)
@@ -30,6 +32,4 @@ signUpCard.querySelector('.tapArea').onclick = signUpOpen;
 signInCard.onclick = e => e.stopPropagation();
 signUpCard.onclick = e => e.stopPropagation();
 
-
 wrapper.onclick = cardClose;
-

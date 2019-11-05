@@ -7,11 +7,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="styles/index.min.css">
+    <script src="./functions/includeScript.js"></script>
     <script src="functions/index.js" defer></script>
 </head>
 
 <body>
     <div class="wrapper">
+        <!-- sign in card -->
         <div class="signInCard">
             <div class="content">
                 <h1>Sign In</h1>
@@ -20,18 +22,12 @@
                 <div class="ring"></div>
             </div>
         </div>
-        <div class="logo">
-            <svg width="180" height="130" viewBox="0 0 180 130" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                    d="M90 2.69943C139.706 2.69943 180 -14.0062 180 35.6994C180 85.4051 139.706 125.699 90 125.699C40.2944 125.699 -1.76132e-06 85.4051 -3.93402e-06 35.6994C-6.10673e-06 -14.0062 40.2944 2.69943 90 2.69943Z"
-                    fill="white" />
-                <path
-                    d="M90 127C40.2944 127 1.66597e-06 143.706 1.07324e-06 94C4.80506e-07 44.2944 40.2944 4 90 4C139.706 4 180 44.2944 180 94C180 143.706 139.706 127 90 127Z"
-                    fill="white" fill-opacity="0.2" class="fill" />
-            </svg>
-            <h1>Social Spark</h1>
-        </div>
 
+        <!-- logo -->
+        <div include-html="logo.html" class="logo"></div>
+        <!-- <h1>Social Spark</h1> -->
+
+        <!-- sign up card -->
         <div class="signUpCard">
             <div class="content">
                 <h1>Sign Up</h1>
@@ -43,6 +39,5 @@
 
     </div>
 </body>
-
 
 </html>

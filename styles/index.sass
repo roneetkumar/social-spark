@@ -1,6 +1,8 @@
 $color-light: #FFEB3B
 $color-dark: #FF9800
 
+@import logo
+
 *
     margin: 0
     padding: 0
@@ -13,23 +15,6 @@ body
     position: relative
     height: 100vh
     overflow: hidden
-
-.logo
-    position: relative
-    display: inline-block
-    top: 50%
-    left: 50%
-    transform: translate(-50%,-50%)
-    svg
-        .fill
-            transition: fill-opacity .3s ease-in-out
-            &:hover
-                fill-opacity: 0.3
-    h1
-        text-align: center
-        font-size: 18px
-        color: #fff
-        margin: 8px
 
 .signInCard,.signUpCard
     width: 100%
