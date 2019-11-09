@@ -1,0 +1,61 @@
+form.signIn,form.signUp
+    .field-container
+        width: 100%
+        border-bottom: 2px solid rgba(0, 0, 0, 0.2)
+        height: 44px
+        display: flex
+        align-items: center
+        margin: auto
+        margin-top: 20px
+        max-width: 300px
+        &:hover
+            border-bottom: 2px solid $color-dark
+
+        input
+            display: inline-block
+            font-size: 18px
+            font-weight: bold
+            border: 0
+            box-sizing: border-box
+            color: $color-dark
+            outline: 0
+            height: 100%
+            width: 100%
+            &::placeholder
+                color: rgba(0, 0, 0, 0.24)
+
+    h2
+        text-align: center
+        font-size: 16px
+        color: rgba(0, 0, 0, 0.24)
+        margin-bottom: 35px
+        &:hover
+            text-decoration: underline
+
+    button
+        font-size: 20px
+        font-weight: bold
+        width: 100%
+        max-width: 300px
+        height: 60px
+        border-radius: 14px
+        border: 3px solid $color-dark
+        color: $color-dark
+        background: #fff
+        margin: 10px auto
+        display: block
+        outline: 0
+        &:hover
+            border: 3px solid $color-dark
+            color: #fff
+            background: $color-dark
+
+form.signIn
+    button
+        border: 0
+        background: $color-dark
+        color: #fff
+        // margin-top: 40px
+        &:hover
+            background: #fff
+            color: $color-dark

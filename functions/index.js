@@ -11,19 +11,30 @@ const signInCard = _('.signInCard');
 const signUpCard = _('.signUpCard');
 const wrapper = _('.wrapper');
 
+const formSignIn = _('form.signIn');
+// console.log(formSignIn);
+
+
 const signInOpen = () => {
     signInCard.classList.toggle('signInOpen')
     signUpCard.classList.remove('signUpOpen')
+
+    // formSignIn.style.display = 'block';
 }
 
 const signUpOpen = () => {
-    signInCard.classList.remove('signInOpen')
-    signUpCard.classList.toggle('signUpOpen')
+    signInCard.classList.remove('signInOpen');
+    signUpCard.classList.toggle('signUpOpen');
+
+    // formSignIn.style.display = 'none';
 }
 
 const cardClose = () => {
     signInCard.classList.remove('signInOpen')
     signUpCard.classList.remove('signUpOpen')
+
+    // formSignIn.style.display = 'none';
+
 }
 
 signInCard.querySelector('.tapArea').onclick = signInOpen;

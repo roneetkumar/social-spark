@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="styles/index.min.css">
     <script src="./functions/includeScript.js"></script>
     <script src="functions/index.js" defer></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,500,700&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -17,6 +18,7 @@
         <div class="signInCard">
             <div class="content">
                 <h1>Sign In</h1>
+                <form class="signIn" action="#" include-html="./components/signIn.html"></form>
             </div>
             <div class="tapArea">
                 <div class="ring"></div>
@@ -24,13 +26,13 @@
         </div>
 
         <!-- logo -->
-        <div include-html="logo.html" class="logo"></div>
-        <!-- <h1>Social Spark</h1> -->
+        <div include-html="./assets/logo.html" class="logo"></div>
 
         <!-- sign up card -->
         <div class="signUpCard">
             <div class="content">
                 <h1>Sign Up</h1>
+                <form class="signUp" action="#" include-html="./components/signUp.html"></form>
             </div>
             <div class="tapArea">
                 <div class="ring"></div>
