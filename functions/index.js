@@ -10,30 +10,36 @@ const __ = ele => document.querySelectorAll(ele)
 const signInCard = _('.signInCard');
 const signUpCard = _('.signUpCard');
 const wrapper = _('.wrapper');
+const logo = _('.logo');
 
-const formSignIn = _('form.signIn');
-// console.log(formSignIn);
 
+
+
+const resetField = () => {
+    const fields = __('.field-container input');
+    fields.forEach(element => {
+        element.value = "";
+    });
+}
 
 const signInOpen = () => {
     signInCard.classList.toggle('signInOpen')
     signUpCard.classList.remove('signUpOpen')
-
-    // formSignIn.style.display = 'block';
+    logo.classList.add('logo-blur')
 }
 
 const signUpOpen = () => {
     signInCard.classList.remove('signInOpen');
     signUpCard.classList.toggle('signUpOpen');
-
-    // formSignIn.style.display = 'none';
+    logo.classList.add('logo-blur')
 }
 
 const cardClose = () => {
     signInCard.classList.remove('signInOpen')
     signUpCard.classList.remove('signUpOpen')
+    logo.classList.remove('logo-blur')
 
-    // formSignIn.style.display = 'none';
+    resetField();
 
 }
 
