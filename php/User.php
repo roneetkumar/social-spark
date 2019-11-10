@@ -2,7 +2,7 @@
 
 class User
 {
-    private $userID;
+    // private $userID;
     private $fname;
     private $lname;
     private $email;
@@ -19,14 +19,9 @@ class User
         $this->pass = $pass;
     }
 
-    public function setUserID($id)
+    public function setEmail($email)
     {
-        $this->userID = $id;
-    }
-
-    public function setEmail($id)
-    {
-        $this->email = $id;
+        $this->email = $email;
     }
 
     public function getPassword()
@@ -36,13 +31,12 @@ class User
 
     public function create($connection)
     {
-        $userID = $this->userID;
         $fname = $this->fname;
         $lname = $this->lname;
         $email = $this->email;
         $pass = $this->pass;
 
-        $sql = "INSERT INTO user VALUES($userID,'$fname', '$lname', '','','$email','', '$pass')";
+        $sql = "INSERT INTO user VALUES('$fname', '$lname', '','','$email','', '$pass')";
         $result = $connection->exec($sql);
         return $result;
     }
@@ -63,7 +57,8 @@ class User
             $phone = $result[0]['phone'];
 
             $user = new User($fname, $lname, $email, $pass);
-
+        } else {
+            return null;
         }
         return $user;
     }

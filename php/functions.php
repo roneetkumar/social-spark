@@ -11,11 +11,7 @@ function signUp($connection)
     $loginPage = '../index.html';
     $errorPage = '../404.html';
 
-    $userID = rand();
-
     $user = new User($fname, $lname, $email, $pass);
-
-    $user->setUserID($userID);
 
     $response = $user->create($connection);
 
@@ -41,11 +37,14 @@ function signIn($connection)
 
     $user = $user->find($connection);
 
-    $dpass = $user->getPassword();
-
-    if ($dpass == $pass) {
-        header("Location: $profilePage");
+    if ($user != null) {
+        $dpass = $user->getPassword();
+        if ($dpass == $pass) {
+            header("Location: $profilePage");
+        } else {
+            echo "Wrong password";
+        }
     } else {
-        header("Location: $errorPage");
+        echo "User does not exist";
     }
 }

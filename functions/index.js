@@ -13,34 +13,41 @@ const wrapper = _('.wrapper');
 const logo = _('.logo');
 
 
-
-
 const resetField = () => {
-    const fields = __('.field-container input');
-    fields.forEach(element => {
-        element.value = "";
-    });
+    __('.field-container input').forEach(element => element.value = "");
 }
 
 const signInOpen = () => {
-    signInCard.classList.toggle('signInOpen')
+    resetField();
     signUpCard.classList.remove('signUpOpen')
-    logo.classList.add('logo-blur')
+    signInCard.classList.toggle('signInOpen')
+
+    if (!signInCard.classList.contains('signInOpen') &&
+        !signUpCard.classList.contains('signUpOpen')) {
+        logo.classList.remove('logo-blur')
+    } else {
+        logo.classList.add('logo-blur')
+    }
 }
 
 const signUpOpen = () => {
+    resetField();
     signInCard.classList.remove('signInOpen');
     signUpCard.classList.toggle('signUpOpen');
-    logo.classList.add('logo-blur')
+
+    if (!signInCard.classList.contains('signInOpen') &&
+        !signUpCard.classList.contains('signUpOpen')) {
+        logo.classList.remove('logo-blur')
+    } else {
+        logo.classList.add('logo-blur')
+    }
 }
 
 const cardClose = () => {
+    resetField();
     signInCard.classList.remove('signInOpen')
     signUpCard.classList.remove('signUpOpen')
     logo.classList.remove('logo-blur')
-
-    resetField();
-
 }
 
 signInCard.querySelector('.tapArea').onclick = signInOpen;
@@ -50,3 +57,9 @@ signInCard.onclick = e => e.stopPropagation();
 signUpCard.onclick = e => e.stopPropagation();
 
 wrapper.onclick = cardClose;
+
+
+
+
+
+// profile
