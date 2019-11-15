@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="styles/index.min.css">
     <script src="./functions/includeScript.js"></script>
     <script src="functions/index.js" defer></script>
+    <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="./assets/favicon.ico">
 </head>
 
 <body>
@@ -17,8 +19,8 @@
         <div class="signInCard">
             <div class="content">
                 <h1>Sign In</h1>
-                <form class="signIn" action="./php/main.php" method="GET" include-html="./components/signIn.html">
-                </form>
+
+                <?php include './components/signIn.php'?>
             </div>
             <div class="tapArea">
                 <div class="ring"></div>
@@ -32,8 +34,7 @@
         <div class="signUpCard">
             <div class="content">
                 <h1>Sign Up</h1>
-                <form class="signUp" action="./php/main.php" method="GET" include-html="./components/signUp.html">
-                </form>
+                <?php include './components/signUp.php'?>
             </div>
             <div class="tapArea">
                 <div class="ring"></div>
@@ -42,5 +43,8 @@
 
     </div>
 </body>
+
+
+
 
 </html>

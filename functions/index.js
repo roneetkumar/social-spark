@@ -57,9 +57,3 @@ signInCard.onclick = e => e.stopPropagation();
 signUpCard.onclick = e => e.stopPropagation();
 
 wrapper.onclick = cardClose;
-
-
-
-
-
-// profile

@@ -1,0 +1,223 @@
+$color-light: #FFEB3B
+$color-dark: #FF9800
+$accent: #E51C23
+
+*
+    margin: 0
+    padding: 0
+    font-family: Google Sans
+
+body
+    // background: linear-gradient(170deg, $color-light 0%, $color-dark 100%)
+
+.overlay
+    width: 100vw
+    height: 100vh
+    background: rgba(#000,.3)
+    backdrop-filter: blur(5px)
+    position: fixed
+    z-index: 1
+    display: none
+
+.overlay-open
+
+.profile-wrapper
+    position: relative
+    // height: 100vh
+    // overflow: hidden
+    background: #37474F
+
+    .search-bar
+        height: 70px
+        background: #fff
+        position: sticky
+        top: 0
+        z-index: 1
+        display: flex
+        justify-content: center
+        align-items: center
+        box-shadow: 0 2px 4px rgba(0,0,0,0.2)
+        .search
+            width: 380px
+            height: 50px
+            border-radius: 60px
+            box-shadow: 0 0 4px rgba(0,0,0,0.3)
+            overflow: hidden
+            display: grid
+            grid-template-columns: max-content 1fr
+            align-content: center
+            input
+                outline: 0
+                border: 0
+            svg
+                padding: 10px
+                border-radius: 50%
+                margin-left: 4px
+                fill: rgba(#000,.6)
+                &:hover
+                    background: rgba(#000,.05)
+
+    .allUsers
+        display: none
+        position: fixed
+        width: 400px
+        left: 50%
+        transform: translateX(-50%)
+        padding: 40px
+        z-index: 2
+        border-radius: 18px
+        overflow: scroll
+        height: 500px
+        form
+            height: 42px
+            background: white
+            margin: 12px
+            border-radius: 12px
+            padding: 10px
+            box-shadow: 0 2px 4px rgba(0,0,0,0.4)
+            display: flex
+            align-items: center
+            display: none
+            button
+                margin: 0 12px
+
+    header
+        height: 280px
+        // max-width: 1200px
+        max-width: 1200px
+        border-radius: 0 0 18px 18px
+        margin: auto
+        overflow: hidden
+        box-shadow: 0 2px 4px rgba(0,0,0,0.2)
+        .topHeader
+            height: calc( 280px / 3)
+            background: #ffd54f
+            position: relative
+            .profile-pic
+                width: 104px
+                height: 104px
+                background: #ffecb3
+                border-radius: 50%
+                margin: auto
+                bottom: 0
+                left: 50%
+                transform: translate(-50%, 50%)
+                position: absolute
+                // border: 1px solid #000
+                overflow: hidden
+
+        .bottomHeader
+            background: #fff
+            height: calc( 280px / 3 * 2)
+            h1
+                font-weight: normal
+                font-size: 18px
+                text-align: center
+                padding-top: 70px
+            h3
+                font-weight: normal
+                font-size: 14px
+                color: rgba(0, 0, 0, 0.4)
+                text-align: center
+
+    main
+        max-width: 1200px
+        margin: auto
+        margin-top: 30px
+        display: grid
+        grid-template-columns: max-content 1fr
+        grid-column-gap: 30px
+        aside.friends
+            max-width: max-content
+            min-width: 300px
+            height: max-content
+            display: inline-block
+            background: #fff
+            border-radius: 18px
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2)
+            border: 16px solid rgba(0,0,0,0)
+            h1
+                text-align: center
+                margin: 10px 0
+            .friend
+                padding: 12px 12px
+                border: 1px solid rgba(#000, .4)
+                border-radius: 10px
+                margin-top: 12px
+                display: grid
+                grid-template-columns: max-content 1fr max-content max-content
+                grid-column-gap: 4px
+                align-content: center
+                align-items: center
+                overflow: hidden
+                img
+                    width: 40px
+                    height: 40px
+                    background: #000
+                    border-radius: 50%
+                    overflow: hidden
+                h3
+                    font-size: 16px
+                    color: $color-dark
+                    margin: 0 10px
+                button
+                    width: 40px
+                    height: 40px
+                    border-radius: 50%
+                    outline: 0
+                    border: 0
+                    overflow: hidden
+                    background: rgba(#000,.05)
+                    color: #fff
+                    padding: 8px
+                    &:hover
+                        background: rgba(#000,.1)
+                    svg
+                        fill: $color-dark
+
+        .grid
+            .createPost
+                height: 100px
+                border-radius: 14px
+                overflow: hidden
+                box-shadow: 0 2px 4px rgba(0,0,0,0.2)
+                background: #fff
+                margin-bottom: 12px
+            .posts
+                overflow-y: scroll
+                text-align: justify
+                display: flex
+                flex-flow: wrap
+                justify-content: space-between
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr))
+                grid-column-gap: 10px
+                justify-items: center
+                .post
+                    width: 250px
+                    height: 300px
+                    border-radius: 14px
+                    background: #fff
+                    display: grid
+                    margin: 10px 0
+                    text-align: center
+                    box-shadow: 0 2px 4px rgba(0,0,0,0.2)
+                    overflow: hidden
+                    position: relative
+                    grid-template-rows: 60px 1fr 60px
+                    .postHeader
+                        text-align: left
+                        padding: 10px 20px
+                        border-bottom: 1px solid rgba(#000,.2)
+                        .email
+
+                        .date
+                            font-size: 12px
+
+                    .postBody
+                        padding: 10px 20px
+                        text-align: left
+                        border-bottom: 1px solid rgba(#000,.2)
+                        // background: pink
+                    .postFooter
+                        // background: #000
+            .image

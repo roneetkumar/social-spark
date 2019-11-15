@@ -6,11 +6,16 @@ require_once 'functions.php';
 try {
     $connection = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
 
-    if (isset($_GET['signUp'])) {
+    if (isset($_POST['signUp'])) {
         signUp($connection);
 
-    } elseif (isset($_GET['signIn'])) {
+    }
+    if (isset($_POST['signIn'])) {
         signIn($connection);
+    }
+
+    if (isset($_POST['create-post'])) {
+        setPost($connection);
     }
 
 } catch (SQLExecption $error) {
