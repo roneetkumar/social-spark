@@ -4,7 +4,6 @@ include_once 'Post.php';
 
 class User
 {
-    // private $userID;
     private $fname;
     private $lname;
     private $email;
@@ -45,13 +44,9 @@ class User
         return $this->lname;
     }
 
-    public function getPosts()
+    public function getFriends($connection)
     {
-        return $this->posts;
-    }
-
-    public function setFriends($connection)
-    {
+        $this->friends = [];
         $sql = "SELECT * from user WHERE Email IN(SELECT RelatedUserEmail FROM friends WHERE RelatingUserEmail=?)";
         $prepare = $connection->prepare($sql);
         $prepare->execute([$this->email]);
@@ -62,19 +57,17 @@ class User
                 $fname = $value['FirstName'];
                 $lname = $value['LastName'];
                 $email = $value['Email'];
-                // $pass = $value['Password'];
-
                 $this->friends[$key] = new User($fname, $lname, $email);
             } else {
                 return null;
             }
-
         }
-
+        return $this->friends;
     }
 
-    public function setPosts($connection)
+    public function getPosts($connection)
     {
+        $this->posts = [];
         $sql = "SELECT * FROM posts WHERE Email =?";
         $prepare = $connection->prepare($sql);
         $prepare->execute([$this->email]);
@@ -88,20 +81,12 @@ class User
                 $date = $tempPost['date'];
 
                 $this->posts[$key] = new Post($postID, $content, $image, $date);
-            } else {
-                return null;
             }
-
         }
-
+        return $this->posts;
     }
 
-    public function getFriends()
-    {
-        return $this->friends;
-    }
-
-    public function createPost($content, $image, $connection)
+    public function setPost($content, $image, $connection)
     {
         $tempPost = new Post($content, $image);
         $postID = $tempPost->getPostID();
@@ -111,9 +96,10 @@ class User
 
         $sql = "INSERT INTO posts VALUES('$postID', '$this->email', '$content', '$image','$date')";
         $result = $connection->exec($sql);
+        return $result;
     }
 
-    public function create($connection)
+    public function createUser($connection)
     {
         $fname = $this->fname;
         $lname = $this->lname;
@@ -133,38 +119,14 @@ class User
         $tempUser = $prepare->fetch();
 
         if (sizeof($tempUser) > 0) {
-            $fname = $tempUser['FirstName'];
-            $lname = $tempUser['LastName'];
-            $email = $tempUser['Email'];
-            $pass = $tempUser['Password'];
-
-            $user = new User($fname, $lname, $email, $pass);
+            $this->fname = $tempUser['FirstName'];
+            $this->lname = $tempUser['LastName'];
+            $this->email = $tempUser['Email'];
+            $this->pass = $tempUser['Password'];
+            return true;
         } else {
-            return null;
+            return false;
         }
-        return $user;
-    }
-
-    public function findAll($connection)
-    {
-        $sql = "SELECT * from user";
-        $prepare = $connection->prepare($sql);
-        $prepare->execute();
-        $result = $prepare->fetchAll();
-
-        foreach ($result as $key => $value) {
-            if (sizeof($result) > 0) {
-                $fname = $value['FirstName'];
-                $lname = $value['LastName'];
-                $email = $value['Email'];
-
-                $allUsers[$key] = new User($fname, $lname, $email);
-            } else {
-                return null;
-            }
-
-        }
-        return $allUsers;
     }
 
     public function __toString()

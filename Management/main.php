@@ -1,21 +1,21 @@
 <?php
-require_once 'dbconfig.php';
-require_once 'User.php';
-require_once 'functions.php';
+
+include_once 'Classes/User.php';
+include_once 'dbconfig.php';
+include_once 'functions.php';
 
 try {
     $connection = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+    $allUsers = findAllUsers($connection);
 
     if (isset($_POST['signUp'])) {
         signUp($connection);
-
     }
     if (isset($_POST['signIn'])) {
         signIn($connection);
     }
-
     if (isset($_POST['create-post'])) {
-        setPost($connection);
+        createPost($connection);
     }
 
 } catch (SQLExecption $error) {

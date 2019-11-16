@@ -8,7 +8,6 @@ $accent: #E51C23
     font-family: Google Sans
 
 body
-    // background: linear-gradient(170deg, $color-light 0%, $color-dark 100%)
 
 .overlay
     width: 100vw
@@ -23,8 +22,6 @@ body
 
 .profile-wrapper
     position: relative
-    // height: 100vh
-    // overflow: hidden
     background: #37474F
 
     .search-bar
@@ -38,6 +35,8 @@ body
         align-items: center
         box-shadow: 0 2px 4px rgba(0,0,0,0.2)
         .search
+            background: #fff
+
             width: 380px
             height: 50px
             border-radius: 60px
@@ -60,26 +59,40 @@ body
     .allUsers
         display: none
         position: fixed
-        width: 400px
         left: 50%
+        -webkit-transform: translateX(-50%)
         transform: translateX(-50%)
-        padding: 40px
         z-index: 2
         border-radius: 18px
         overflow: scroll
-        height: 500px
+        height: 90%
+        top: 80px
+        padding: 0 10px
         form
-            height: 42px
             background: white
-            margin: 12px
             border-radius: 12px
             padding: 10px
+            -webkit-box-shadow: 0 2px 4px rgba(0,0,0,0.4)
             box-shadow: 0 2px 4px rgba(0,0,0,0.4)
             display: flex
             align-items: center
             display: none
+            max-width: 350px
+            margin: 12px
+            display: grid
+            grid-template-columns: 1fr max-content max-content
+            grid-column-gap: 1em
+            span
+                font-weight: bold
+                font-size: 18px
             button
-                margin: 0 12px
+                padding: 12px
+                border-radius: 12px
+                border: 0
+                background: linear-gradient(180deg, #FFC107, #FF9800)
+                font-weight: bold
+                font-size: 14px
+                color: rgba(0, 0, 0, 0.6)
 
     header
         height: 280px

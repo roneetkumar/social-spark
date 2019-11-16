@@ -5,11 +5,8 @@ const __ = ele => document.querySelectorAll(ele)
 
 
 const overlay = _('.overlay');
-
 const search = _('.search input');
-
-const allUses = _('.allUsers')
-
+const allUsers = _('.allUsers')
 const body = _('body');
 
 
@@ -22,13 +19,36 @@ const startSearch = () => {
 
 const overlayClick = () => {
     overlay.style.display = 'none'
-    allUses.style.display = 'none'
+    allUsers.style.display = 'none'
     body.style.overflow = 'initial'
+}
+
+const searchFriendList = (e) => {
+
+    let searchString = e.target.value.toUpperCase();
+    let userList = allUsers.querySelectorAll('form span');
+
+    userList.forEach(user => {
+        if (user.innerText.toUpperCase().includes(searchString)) {
+            allUsers.style.display = 'block'
+            user.parentElement.style.display = 'grid'
+        }
+        else if (searchString === '') {
+            allUsers.style.display = 'none'
+        }
+        else {
+            user.parentElement.style.display = 'none'
+        }
+    });
 }
 
 
 search.onfocus = startSearch;
-overlay.onclick = overlayClick
+overlay.onclick = overlayClick;
+
+search.onkeyup = e => searchFriendList(e);
+
+
 
 console.log(overlay, search);
 

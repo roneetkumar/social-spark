@@ -1,23 +1,19 @@
 <div class='grid'>
 
- <?php if (!isset($_POST['profile'])): ?>
-    <form action='#' method='POST' class='createPost'>
-        <input type='text' name='content'>
-        <input type='submit' name='create-post'>
-    </form>
- <?php endif?>
-
-
-    <?php $user->setPosts($connection);?>
+    <?php if (!isset($_POST['profile'])): ?>
+        <form action='../Management/main.php' method='POST' class='createPost'>
+        <h1>create post</h1>
+            <textarea type='text' name='content'></textarea>
+            <input type='submit' name='create-post'>
+        </form>
+    <?php endif?>
 
     <div class="posts">
-
-        <?php foreach ($user->getPosts() as $key => $post): ?>
+        <?php foreach ($user->getPosts($connection) as $key => $post): ?>
             <?php $id = $post->getPostID();?>
             <?php $content = $post->getContent();?>
             <?php $image = $post->getImage();?>
             <?php $date = $post->getDate();?>
-
 
             <div class="post">
                 <div class="postHeader">
@@ -30,6 +26,5 @@
                 </div>
                 <div class="postFooter"></div>
             </div>
-            <?php endforeach?>
-    </div>
+        <?php endforeach?>
 </div>

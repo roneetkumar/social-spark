@@ -1,8 +1,7 @@
 <?php
-$profilePage = '../profile.php';
-$loginPage = './index.php';
+$profilePage = '../Profile/profile.php';
+$loginPage = '../index.php';
 $errorPage = '../404.html';
-include_once 'User.php';
 
 session_start();
 
@@ -16,11 +15,8 @@ function signUp($connection)
     $response = $user->create($connection);
 
     if ($response) {
-        // $_SESSION['logged-user'] = $email;
         $_SESSION['user'] = $user;
-
         header("Location: " . $GLOBALS['profilePage']);
-        exit();
     } else {
         header("Location: $errorPage");
     }
@@ -30,38 +26,52 @@ function signIn($connection)
 {
     $email = $_POST['email'];
     $pass = md5($_POST['pass']);
-    echo $pass;
-
     $user = new User();
-
     $user->setEmail($email);
+    $found = $user->find($connection);
 
-    $user = $user->find($connection);
-
-    if ($user != null) {
-
-        $dpass = $user->getPassword();
-        $demail = $user->getEmail();
-        if ($dpass == $pass) {
+    if ($found) {
+        $userPassword = $user->getPassword();
+        $userEmail = $user->getEmail();
+        if ($userPassword == $pass) {
             $_SESSION['user'] = $user;
             header("Location: " . $GLOBALS['profilePage']);
-            exit();
         } else {
             echo "Wrong password";
         }
     } else {
         echo "User does not exist";
     }
-
 }
 
-function setPost($connection)
+function findAllUsers($connection)
+{
+    $sql = "SELECT * from user";
+    $prepare = $connection->prepare($sql);
+    $prepare->execute();
+    $result = $prepare->fetchAll();
+
+    foreach ($result as $key => $value) {
+        if (sizeof($result) > 0) {
+            $fname = $value['FirstName'];
+            $lname = $value['LastName'];
+            $email = $value['Email'];
+            $allUsers[$key] = new User($fname, $lname, $email);
+        } else {
+            return null;
+        }
+    }
+    return $allUsers;
+}
+
+function createPost($connection)
 {
     $content = $_POST['content'];
     $user = $_SESSION['user'];
-
-    $user->createPost($content, null, $connection);
-
+    $result = $user->setPost($content, null, $connection);
+    if ($result) {
+        header("Location: " . $GLOBALS['profilePage']);
+    }
 }
 
 if (isset($_POST['logout'])) {

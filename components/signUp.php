@@ -1,4 +1,4 @@
-<form class="signUp" action="./php/main.php" method="POST" >
+<form class="signUp" action="./Management/main.php" method="POST" >
     <div class="field-container">
         <div class="icon"></div>
         <input type="text" placeholder="First Name" name="fname" required autocomplete="given-name">
