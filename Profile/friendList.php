@@ -1,3 +1,5 @@
+
+<aside>
 <aside class='friends'>
     <h1>Friends</h1>
     <?php foreach ($user->getFriends($connection) as $friend): ?>
@@ -5,7 +7,7 @@
     <?php $friendsEmail = $friend->getEmail();?>
 
             <div class='friend'>
-                <img src='' alt='img'>
+                <img src='../assets/face-24px.svg' alt='img'>
                     <h3> <?php echo $friendName ?></h3>
                     <form action="#" method='POST'>
                         <button name='friendProfile' value='<?php echo $friendsEmail ?>'>
@@ -17,4 +19,8 @@
                     </form>
             </div>
     <?php endforeach?>
+</aside>
+<aside class="friends">
+        requests
+</aside>
 </aside>

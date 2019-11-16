@@ -47,9 +47,9 @@ class User
     public function getFriends($connection)
     {
         $this->friends = [];
-        $sql = "SELECT * from user WHERE Email IN(SELECT RelatedUserEmail FROM friends WHERE RelatingUserEmail=?)";
+        $sql = "SELECT * from user WHERE Email IN(SELECT RelatedUserEmail FROM friends WHERE RelatingUserEmail=? AND status =?)";
         $prepare = $connection->prepare($sql);
-        $prepare->execute([$this->email]);
+        $prepare->execute([$this->email, '1']);
         $result = $prepare->fetchAll();
 
         foreach ($result as $key => $value) {
@@ -129,9 +129,17 @@ class User
         }
     }
 
+    public function sendRequest($connection, $friendEmail)
+    {
+        $myEmail = $this->email;
+        $sql = "INSERT INTO friends VALUES('$this->email', $friendEmail,'0')";
+        $result = $connection->exec($sql);
+
+        return $result;
+    }
+
     public function __toString()
     {
         return "$this->fname,$this->lname, $this->email";
     }
-
 }

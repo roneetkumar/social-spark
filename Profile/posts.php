@@ -2,8 +2,7 @@
 
     <?php if (!isset($_POST['profile'])): ?>
         <form action='../Management/main.php' method='POST' class='createPost'>
-        <h1>create post</h1>
-            <textarea type='text' name='content'></textarea>
+            <textarea type='text' name='content' placeholder="create a post"></textarea>
             <input type='submit' name='create-post'>
         </form>
     <?php endif?>

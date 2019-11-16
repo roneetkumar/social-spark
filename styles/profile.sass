@@ -19,32 +19,42 @@ body
     display: none
 
 .overlay-open
-
+.menuOpen
+    display: inline-block !important
+    transform: translateX(0px) !important
 .profile-wrapper
     position: relative
-    background: #37474F
+    background: linear-gradient(180deg, #ffc107, white)
 
     .search-bar
         height: 70px
-        background: #fff
+        background: #FFC107
         position: sticky
         top: 0
+        padding: 0 10px
         z-index: 1
+        grid-column-gap: 1em
+        justify-items: center
+        align-content: center
+        box-shadow: 0 2px 4px rgba(0,0,0,0.3)
         display: flex
-        justify-content: center
-        align-items: center
-        box-shadow: 0 2px 4px rgba(0,0,0,0.2)
+        align-content: center
+        @media screen and ( max-width: 650px )
+            display: grid
+            grid-template-columns: max-content 1fr max-content
+
         .search
             background: #fff
-
-            width: 380px
+            max-width: 380px
+            width: 100%
             height: 50px
             border-radius: 60px
-            box-shadow: 0 0 4px rgba(0,0,0,0.3)
+            box-shadow: 0 0 6px rgba(0,0,0,0.3)
             overflow: hidden
             display: grid
             grid-template-columns: max-content 1fr
             align-content: center
+            margin: auto
             input
                 outline: 0
                 border: 0
@@ -55,6 +65,35 @@ body
                 fill: rgba(#000,.6)
                 &:hover
                     background: rgba(#000,.05)
+
+        button
+            width: 42px
+            height: 42px
+            border-radius: 50%
+            border: 0
+            outline: 0
+            background: rgba(#fff,.4)
+            margin-top: 4px
+            svg
+                fill: rgba(#000,.4)
+                margin: 9px
+            &:hover
+                background: rgba(#fff,.6)
+
+        .menu
+            display: none
+            @media screen and ( max-width: 650px )
+                display: initial
+
+        .logout
+            position: absolute
+            right: 12px
+            top: 10px
+            display: block
+            @media screen and ( max-width: 650px )
+                position: relative
+                top: initial
+                right: initial
 
     .allUsers
         display: none
@@ -96,20 +135,20 @@ body
 
     header
         height: 280px
-        // max-width: 1200px
-        max-width: 1200px
+        max-width: 910px
         border-radius: 0 0 18px 18px
         margin: auto
         overflow: hidden
         box-shadow: 0 2px 4px rgba(0,0,0,0.2)
         .topHeader
             height: calc( 280px / 3)
-            background: #ffd54f
+            background: #eee
             position: relative
             .profile-pic
                 width: 104px
                 height: 104px
-                background: #ffecb3
+                background: #fff
+                border: 2px dotted
                 border-radius: 50%
                 margin: auto
                 bottom: 0
@@ -134,21 +173,36 @@ body
                 text-align: center
 
     main
-        max-width: 1200px
+        padding: 0 12px
+        max-width: 910px
         margin: auto
         margin-top: 30px
         display: grid
         grid-template-columns: max-content 1fr
         grid-column-gap: 30px
+        @media screen and ( max-width: 650px )
+            grid-template-columns: 1fr
+
         aside.friends
             max-width: max-content
             min-width: 300px
             height: max-content
-            display: inline-block
+            margin-bottom: 20px
             background: #fff
             border-radius: 18px
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2)
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3)
             border: 16px solid rgba(0,0,0,0)
+            transition: all .3s ease-in-out
+            @media screen and ( max-width: 650px )
+                position: fixed
+                top: 0
+                left: 0
+                transform: translateX(-350px)
+                z-index: 1
+                border-radius: 0
+                height: 100vh
+                width: 80%
+                min-width: initial
             h1
                 text-align: center
                 margin: 10px 0
@@ -166,7 +220,9 @@ body
                 img
                     width: 40px
                     height: 40px
-                    background: #000
+                    border: 2px dotted #676767
+                    padding: 4px
+                    box-sizing: border-box
                     border-radius: 50%
                     overflow: hidden
                 h3
@@ -189,34 +245,61 @@ body
                         fill: $color-dark
 
         .grid
+            margin-bottom: 20px
             .createPost
-                height: 100px
+                height: 150px
                 border-radius: 14px
                 overflow: hidden
-                box-shadow: 0 2px 4px rgba(0,0,0,0.2)
+                box-shadow: 0 2px 4px rgba(0,0,0,0.3)
                 background: #fff
-                margin-bottom: 12px
+                // margin: 0 10px
+                margin-bottom: 20px
+                display: grid
+                grid-template-rows: 1fr max-content
+                // margin-right: 0
+                textarea
+                    outline: none
+                    user-select: text
+                    white-space: pre-wrap
+                    overflow-wrap: break-word
+                    padding: 20px
+                    border: 0
+                    outline: 0
+                    font-size: 14px
+                    resize: none
+                input[type='submit']
+                    padding: 10px
+                    font-weight: bolder
+                    font-size: 14px
+                    outline: 0
+                    border: 0
+                    background: rgba(#000,.1)
+                    &:hover
+                        background: rgba(#000,.2)
+
             .posts
                 overflow-y: scroll
-                text-align: justify
-                display: flex
-                flex-flow: wrap
-                justify-content: space-between
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr))
-                grid-column-gap: 10px
-                justify-items: center
+                // text-align: justify
+                // display: flex
+                // flex-flow: wrap
+                // justify-content: space-between
+                // grid-template-columns: repeat(auto-fill, minmax(250px, 1fr))
+                // grid-column-gap: 10px
+                // justify-items: center
+                text-align: center
                 .post
                     width: 250px
                     height: 300px
                     border-radius: 14px
                     background: #fff
-                    display: grid
-                    margin: 10px 0
+                    display: inline-grid
+                    margin: 10px
                     text-align: center
-                    box-shadow: 0 2px 4px rgba(0,0,0,0.2)
+                    box-shadow: 0 2px 4px rgba(0,0,0,0.3)
                     overflow: hidden
                     position: relative
                     grid-template-rows: 60px 1fr 60px
+                    // margin-right: 0
                     .postHeader
                         text-align: left
                         padding: 10px 20px

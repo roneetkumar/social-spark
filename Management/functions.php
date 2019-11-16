@@ -12,7 +12,7 @@ function signUp($connection)
     $email = $_POST['email'];
     $pass = md5($_POST['pass']);
     $user = new User($fname, $lname, $email, $pass);
-    $response = $user->create($connection);
+    $response = $user->createUser($connection);
 
     if ($response) {
         $_SESSION['user'] = $user;
@@ -78,4 +78,21 @@ if (isset($_POST['logout'])) {
     unset($_SESSION['user']);
     session_destroy();
     header("location: " . $GLOBALS['loginPage']);
+}
+
+function addFriend($connection)
+{
+    // $profileEmail = $_POST['friendProfile'];
+    // $user = new User();
+    // $user->setEmail($profileEmail);
+    // $found = $user->find($connection);
+    // if ($found) {
+    //     $name = $user->getFname() . " " . $user->getLname();
+    // }
+    $user = $_SESSION['user'];
+    $friendEmail = $_POST['addFriend'];
+    // echo $friendEmail;
+
+    $user->sendRequest($connection, $friendEmail);
+
 }

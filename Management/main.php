@@ -17,6 +17,9 @@ try {
     if (isset($_POST['create-post'])) {
         createPost($connection);
     }
+    if (isset($_POST['addFriend'])) {
+        addFriend($connection);
+    }
 
 } catch (SQLExecption $error) {
     echo $connection->Error[2];

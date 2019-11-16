@@ -15,6 +15,17 @@ if (isset($_SESSION['user'])) {
             $name = $user->getFname() . " " . $user->getLname();
         }
     }
+    if (isset($_POST['addFriend'])) {
+
+        // $profileEmail = $_POST['friendProfile'];
+        // $user = new User();
+        // $user->setEmail($profileEmail);
+        // $found = $user->find($connection);
+        // if ($found) {
+        //     $name = $user->getFname() . " " . $user->getLname();
+        // }
+
+    }
 
 }
 if (!isset($_SESSION['user'])) {
