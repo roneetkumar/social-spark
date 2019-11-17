@@ -20,6 +20,9 @@ try {
     if (isset($_POST['addFriend'])) {
         addFriend($connection);
     }
+    if (isset($_POST['accept'])) {
+        accept($connection);
+    }
 
 } catch (SQLExecption $error) {
     echo $connection->Error[2];

@@ -1,3 +1,12 @@
+<?php
+
+require_once './Management/main.php';
+
+unset($_SESSION['user']);
+session_destroy();
+// header("location: " . $GLOBALS['loginPage']);
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">

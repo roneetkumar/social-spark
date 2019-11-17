@@ -15,24 +15,12 @@ if (isset($_SESSION['user'])) {
             $name = $user->getFname() . " " . $user->getLname();
         }
     }
-    if (isset($_POST['addFriend'])) {
-
-        // $profileEmail = $_POST['friendProfile'];
-        // $user = new User();
-        // $user->setEmail($profileEmail);
-        // $found = $user->find($connection);
-        // if ($found) {
-        //     $name = $user->getFname() . " " . $user->getLname();
-        // }
-
-    }
-
 }
+
 if (!isset($_SESSION['user'])) {
     header("Location: $loginPage");
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -49,12 +37,12 @@ if (!isset($_SESSION['user'])) {
 <body>
     <div class="profile-wrapper">
         <div class="overlay"></div>
-            <?php include 'searchUser.php'?>
-            <?php include 'header.php'?>
-            <main>
-                <?php include 'friendList.php'?>
-                <?php include 'posts.php'?>
-            </main>
+        <?php include 'searchUser.php'?>
+        <?php include 'header.php'?>
+        <main>
+            <?php include 'friendList.php'?>
+            <?php include 'posts.php'?>
+        </main>
     </div>
 </body>
 </html>

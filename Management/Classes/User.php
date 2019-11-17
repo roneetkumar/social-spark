@@ -11,6 +11,7 @@ class User
     private $friends = [];
     private $posts = [];
     private $pages = [];
+    private $requests = [];
 
     public function __construct($fname = null, $lname = null, $email = null, $pass = null)
     {
@@ -132,10 +133,44 @@ class User
     public function sendRequest($connection, $friendEmail)
     {
         $myEmail = $this->email;
-        $sql = "INSERT INTO friends VALUES('$this->email', $friendEmail,'0')";
+        $sql = "INSERT INTO friends VALUES('$this->email', '$friendEmail','0')";
         $result = $connection->exec($sql);
-
         return $result;
+    }
+
+    public function getRequest($connection)
+    {
+        $this->requests = [];
+        $sql = "SELECT * from user WHERE Email IN(SELECT RelatingUserEmail FROM friends WHERE RelatedUserEmail=? AND status =?)";
+        $prepare = $connection->prepare($sql);
+        $prepare->execute([$this->email, '0']);
+        $result = $prepare->fetchAll();
+
+        foreach ($result as $key => $value) {
+            if (sizeof($result) > 0) {
+                $fname = $value['FirstName'];
+                $lname = $value['LastName'];
+                $email = $value['Email'];
+                $this->requests[$key] = new User($fname, $lname, $email);
+            } else {
+                return null;
+            }
+        }
+        return $this->requests;
+    }
+
+    public function acceptRequest($connection, $friendEmail)
+    {
+        $sql = "UPDATE friends SET status =? WHERE RelatedUserEmail=? AND RelatingUserEmail=?";
+        $prepare = $connection->prepare($sql);
+        $result = $prepare->execute(['1', $this->email, $friendEmail]);
+
+        if ($result) {
+            $sql = "INSERT INTO friends VALUES('$this->email', '$friendEmail','1')";
+            $result = $connection->exec($sql);
+            return $result;
+        }
+
     }
 
     public function __toString()

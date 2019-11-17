@@ -82,17 +82,29 @@ if (isset($_POST['logout'])) {
 
 function addFriend($connection)
 {
-    // $profileEmail = $_POST['friendProfile'];
-    // $user = new User();
-    // $user->setEmail($profileEmail);
-    // $found = $user->find($connection);
-    // if ($found) {
-    //     $name = $user->getFname() . " " . $user->getLname();
-    // }
     $user = $_SESSION['user'];
     $friendEmail = $_POST['addFriend'];
-    // echo $friendEmail;
 
-    $user->sendRequest($connection, $friendEmail);
+    $result = $user->sendRequest($connection, $friendEmail);
+    if ($result) {
+        message("Request Sent");
+    } else {
+        message("can't sent request at the moment");
+    }
+}
 
+function accept($connection)
+{
+    $user = $_SESSION['user'];
+    $friendEmail = $_POST['accept'];
+
+    $result = $user->acceptRequest($connection, $friendEmail);
+    if ($result) {
+        message($friendEmail . " is now your friend");
+    }
+}
+
+function message($string)
+{
+    echo "<script> alert('$string') </script>";
 }

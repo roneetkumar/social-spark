@@ -1,6 +1,6 @@
 <div class='grid'>
 
-    <?php if (!isset($_POST['profile'])): ?>
+    <?php if (!isset($_POST['friendProfile'])): ?>
         <form action='../Management/main.php' method='POST' class='createPost'>
             <textarea type='text' name='content' placeholder="create a post"></textarea>
             <input type='submit' name='create-post'>
