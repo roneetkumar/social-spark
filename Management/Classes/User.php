@@ -69,7 +69,7 @@ class User
     public function getPosts($connection)
     {
         $this->posts = [];
-        $sql = "SELECT * FROM posts WHERE Email =?";
+        $sql = "SELECT * FROM posts WHERE Email =? ORDER BY date DESC";
         $prepare = $connection->prepare($sql);
         $prepare->execute([$this->email]);
         $result = $prepare->fetchAll();
@@ -81,7 +81,7 @@ class User
                 $image = $tempPost['image'];
                 $date = $tempPost['date'];
 
-                $this->posts[$key] = new Post($postID, $content, $image, $date);
+                $this->posts[$key] = new Post($postID, "", $content, $image, $date);
             }
         }
         return $this->posts;
@@ -95,7 +95,7 @@ class User
         $image = $tempPost->getImage();
         $date = $tempPost->getDate();
 
-        $sql = "INSERT INTO posts VALUES('$postID', '$this->email', '$content', '$image','$date','')";
+        $sql = "INSERT INTO posts VALUES('$postID', '$this->email', '$content', '$image','$date')";
         $result = $connection->exec($sql);
         return $result;
     }
@@ -119,7 +119,7 @@ class User
         $prepare->execute([$this->email]);
         $tempUser = $prepare->fetch();
 
-        if (sizeof($tempUser) > 0) {
+        if ($tempUser != null) {
             $this->fname = $tempUser['FirstName'];
             $this->lname = $tempUser['LastName'];
             $this->email = $tempUser['Email'];
@@ -180,19 +180,43 @@ class User
         return $result;
     }
 
-    public function like($connection, $postID)
+    public function removeFriend($connection, $friendEmail)
     {
-        $sql = "SELECT likes from posts WHERE postID=?";
+        $sql = "DELETE FROM friends WHERE RelatedUserEmail=? AND RelatingUserEmail=? AND status =?";
         $prepare = $connection->prepare($sql);
-        $prepare->execute([$postID]);
-        $likes = $prepare->fetch()['likes'];
-        $post = new Post();
-        $post = $post->findPost($connection, $postID);
-        // $likes =;
+        $result = $prepare->execute([$friendEmail, $this->email, '1']);
 
-        $sql = "UPDATE posts SET likes =? WHERE postID =?";
+        if ($result) {
+            $sql = "DELETE FROM friends WHERE RelatedUserEmail=? AND RelatingUserEmail=? AND status =?";
+            $prepare = $connection->prepare($sql);
+            $result = $prepare->execute([$this->email, $friendEmail, '1']);
+            return $result;
+        }
+    }
+
+    public function likePost($connection, $postID)
+    {
+        $sql = "SELECT email FROM likes WHERE postID=? AND email=?";
         $prepare = $connection->prepare($sql);
-        $result = $prepare->execute([++$likes, $postID]);
+        $prepare->execute([$postID, $this->email]);
+        $liked = $prepare->fetch()['email'];
+        if ($liked != null) {
+            $sql = "DELETE FROM likes WHERE postID=? AND email=?";
+            $prepare = $connection->prepare($sql);
+            $result = $prepare->execute([$postID, $this->email]);
+            return $result;
+        } else {
+            $sql = "INSERT INTO likes VALUES('$postID', '$this->email')";
+            $result = $connection->exec($sql);
+            return $result;
+        }
+    }
+
+    public function deletePost($connection, $postID)
+    {
+        $sql = "DELETE FROM posts WHERE postID=?";
+        $prepare = $connection->prepare($sql);
+        $result = $prepare->execute([$postID]);
         return $result;
     }
 

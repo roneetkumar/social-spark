@@ -1,0 +1,165 @@
+$color-light: #FFEB3B
+$color-dark: #FF9800
+$accent: #E51C23
+
+.friendsList
+    max-width: 300px
+    min-width: 250px
+    height: max-content
+    margin-bottom: 20px
+    background: #fff
+    border-radius: 18px
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3)
+    border: 16px solid rgba(0,0,0,0)
+    transition: all .2s ease-in-out
+    will-change: transform
+    @media screen and ( max-width: 618px )
+        position: fixed
+        top: 0
+        left: 0
+        transform: translateX(-350px)
+        border-radius: 0
+        height: 100vh
+        width: 80%
+        min-width: initial
+    h2
+        text-align: center
+        margin: 10px 0
+    .friend
+        padding: 12px 12px
+        border: 1px solid rgba(#000, .4)
+        border-radius: 10px
+        margin-top: 12px
+        display: grid
+        grid-template-columns: max-content 1fr
+        grid-column-gap: 10px
+        align-content: center
+        align-items: center
+        overflow: hidden
+        position: relative
+        img
+            width: 40px
+            height: 40px
+            border: 2px dotted #676767
+            padding: 4px
+            box-sizing: border-box
+            border-radius: 50%
+            overflow: hidden
+        h3
+            font-size: 16px
+            color: $color-dark
+            margin: 0 10px
+        &:hover .action-btn
+            display: flex
+
+        .action-btn
+            display: none
+            backdrop-filter: blur(5px)
+            justify-content: space-around
+            align-items: center
+            position: absolute
+            width: 100%
+            height: 100%
+            border-radius: 10px
+            button
+                width: 40px
+                height: 40px
+                border-radius: 50%
+                outline: 0
+                border: 0
+                overflow: hidden
+                background: rgba(#000,.05)
+                background: $color-dark
+                padding: 8px
+                &:hover
+                    background: rgba(#fff,.1)
+                    box-shadow: inset 0 0 0 2px $color-dark
+                    svg
+                        fill: $color-dark
+
+                svg
+                    fill: #fff
+.menuOpen
+    display: inline-block
+    transform: translateX(0px)
+    z-index: 1
+
+.request-list
+    background: #fff
+    border: 1px solid
+    position: fixed
+    top: 50%
+    left : 50%
+    transform: translate(-50%,-50%) scale(0)
+    // max-width: 300px
+    min-width: 250px
+    border-radius: 18px
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3)
+    border: 16px solid rgba(0,0,0,0)
+    transition: all .2s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+    will-change: scale
+    z-index: 2
+    @media screen and ( max-width: 312px )
+        width: 100%
+        height: 100%
+        padding: 10px
+    h2
+        text-align: center
+        margin: 10px 0
+    .friend
+        padding: 12px 12px
+        border: 1px solid rgba(#000, .4)
+        border-radius: 10px
+        margin-top: 12px
+        display: grid
+        grid-template-columns: max-content 1fr
+        grid-column-gap: 10px
+        align-content: center
+        align-items: center
+        overflow: hidden
+        position: relative
+        img
+            width: 40px
+            height: 40px
+            border: 2px dotted #676767
+            padding: 4px
+            box-sizing: border-box
+            border-radius: 50%
+            overflow: hidden
+        h3
+            font-size: 16px
+            color: $color-dark
+            margin: 0 10px
+        &:hover .action-btn
+            display: flex
+            justify-content: space-around
+            align-items: center
+
+        .action-btn
+            display: none
+            position: absolute
+            backdrop-filter: blur(5px)
+            width: 100%
+            height: 100%
+            border-radius: 10px
+            button
+                width: 40px
+                height: 40px
+                border-radius: 50%
+                outline: 0
+                border: 0
+                overflow: hidden
+                background: rgba(#000,.05)
+                background: $color-dark
+                padding: 8px
+                &:hover
+                    background: rgba(#fff,.1)
+                    box-shadow: inset 0 0 0 2px $color-dark
+                    svg
+                        fill: $color-dark
+
+                svg
+                    fill: #fff
+
+.openRequests
+    transform: translate(-50%,-50%) scale(1)

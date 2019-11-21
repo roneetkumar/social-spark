@@ -1,0 +1,69 @@
+$color-light: #FFEB3B
+$color-dark: #FF9800
+$accent: #E51C23
+
+*
+    margin: 0
+    padding: 0
+    font-family: Google Sans
+
+.overlay
+    width: 100vw
+    height: 100vh
+    background: rgba(#000,.6)
+    // backdrop-filter: blur(4px)
+    position: fixed
+    z-index: 2
+    display: none
+    opacity: 0
+    transition: all .3s ease
+
+.feed-wrapper
+    position: relative
+    background: linear-gradient(180deg, #ffc107, white)
+    main
+        margin-bottom: 100px
+    h4
+        text-align: center
+        margin-bottom: 20px
+    .logo-wrapper
+        display: flex
+        align-items: center
+        width: max-content
+        margin: 30px auto
+        h1
+            color: $accent
+            display: inline-block
+            line-height: 30px
+            margin-left: 10px
+            padding-left: 10px
+            border-left: 2px solid rgba(#fff,.4)
+
+        .logo
+            width: 76px
+            height: 76px
+            border-radius: 50%
+            background: $accent
+            position: relative
+            display: inline-block
+            overflow: hidden
+            animation: sparkling 3s ease-in-out infinite
+            transition: all 1s ease
+            svg
+                position: absolute
+                width: 70%
+                height: 70%
+                top: 50%
+                left: 50%
+                transform: translate(-50%,-50%)
+                animation: sparkling 6s ease-in-out infinite
+
+            .finish
+                width: 100%
+                height: 100%
+                background: radial-gradient(100% 100% at 0% 0%, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%)
+                position: absolute
+
+            .logo-blur
+                filter: blur(10px)
+                transform: translate(-50%,-50%)

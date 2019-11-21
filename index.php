@@ -1,15 +1,6 @@
-<?php
-
-require_once './Management/main.php';
-
-unset($_SESSION['user']);
-session_destroy();
-// header("location: " . $GLOBALS['loginPage']);
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,14 +12,14 @@ session_destroy();
     <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" href="./assets/favicon.ico">
 </head>
+
 <body>
-<div class="wrapper">
+    <div class="wrapper">
         <!-- sign in card -->
         <div class="signInCard">
             <div class="content">
                 <h1>Sign In</h1>
-
-                <?php include './components/signIn.php'?>
+                <?php include './components/login/sign-in.php'?>
             </div>
             <div class="tapArea">
                 <div class="ring"></div>
@@ -40,12 +31,11 @@ session_destroy();
             <?php include "assets/logo.php"?>
         </div>
 
-
         <!-- sign up card -->
         <div class="signUpCard">
             <div class="content">
                 <h1>Sign Up</h1>
-                <?php include './components/signUp.php'?>
+                <?php include './components/login/sign-up.php'?>
             </div>
             <div class="tapArea">
                 <div class="ring"></div>
@@ -54,4 +44,5 @@ session_destroy();
 
     </div>
 </body>
+
 </html>

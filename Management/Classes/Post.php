@@ -7,6 +7,8 @@ class Post
     private $image;
     private $date;
     private $likes;
+    private $email;
+    private $canEdit;
 
     public function __construct()
     {
@@ -19,8 +21,8 @@ class Post
             case 2:
                 $this->construct1($args[0], $args[1]);
                 break;
-            case 4:
-                $this->construct2($args[0], $args[1], $args[2], $args[3]);
+            case 5:
+                $this->construct2($args[0], $args[1], $args[2], $args[3], $args[4]);
                 break;
             default:
                 trigger_error('Incorrect number of arguments for Foo::__construct', E_USER_WARNING);
@@ -31,6 +33,8 @@ class Post
     private function construct0()
     {
         //constructor that takes no parameters
+        $this->canEdit = false;
+
     }
 
     private function construct1($content, $image)
@@ -38,16 +42,19 @@ class Post
         $this->postID = rand(10000, 99999);
         $this->content = $content;
         $this->image = $image;
-        $this->date = date("Y-m-d");
+        $this->date = date("Y-m-d h:i:sa");
+        $this->canEdit = false;
 
     }
 
-    private function construct2($postID, $content, $image, $date)
+    private function construct2($postID, $email, $content, $image, $date)
     {
         $this->postID = $postID;
+        $this->email = $email;
         $this->content = $content;
         $this->image = $image;
         $this->date = $date;
+        $this->canEdit = false;
 
     }
 
@@ -67,35 +74,48 @@ class Post
     {
         return $this->date;
     }
-
-    public function getLikes()
+    public function getCanEdit()
     {
-        // $sql = "SELECT likes from posts WHERE postID=?";
-        // $prepare = $connection->prepare($sql);
-        // $prepare->execute([$this->postID]);
-        // $likes = $prepare->fetch()['likes'];
+        return $this->canEdit;
+    }
 
-        // return $this->likes;
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    public function getLikes($connection)
+    {
+        $sql = "SELECT count(postID) as 'likes' from likes WHERE postID=?";
+        $prepare = $connection->prepare($sql);
+        $prepare->execute([$this->postID]);
+        $this->likes = $prepare->fetch()['likes'];
+
+        return $this->likes;
+    }
+
+    public function setEmail($email)
+    {
+        $this->email = $email;
     }
 
     public function findPost($connection, $postID)
     {
-        // $sql = "SELECT * FROM poast WHERE postID =?";
-        // $prepare = $connection->prepare($sql);
-        // $prepare->execute([$postID]);
-        // $tempUser = $prepare->fetch();
+        $sql = "SELECT * FROM posts WHERE postID =?";
+        $prepare = $connection->prepare($sql);
+        $prepare->execute([$postID]);
+        $tempUser = $prepare->fetch();
 
-        // if (sizeof($tempUser) > 0) {
-        //     $this->fname = $tempUser['postID'];
-        //     $this->lname = $tempUser['email'];
-        //     $this->email = $tempUser['content'];
-        //     $this->pass = $tempUser['image'];
-        //     $this->pass = $tempUser['date'];
-        //     $this->pass = $tempUser['likes'];
-        //     return true;
-        // } else {
-        //     return false;
-        // }
+        if (sizeof($tempUser) > 0) {
+            $this->postID = $tempUser['postID'];
+            $this->email = $tempUser['email'];
+            $this->content = $tempUser['content'];
+            $this->image = $tempUser['image'];
+            $this->date = $tempUser['date'];
+            return true;
+        } else {
+            return false;
+        }
 
     }
 

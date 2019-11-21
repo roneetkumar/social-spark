@@ -1,0 +1,75 @@
+$color-light: #FFEB3B
+$color-dark: #FF9800
+$accent: #E51C23
+
+header
+    height: 280px
+    max-width: 910px
+    border-radius: 0 0 18px 18px
+    margin: auto
+    overflow: hidden
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2)
+    display: grid
+    grid-template-rows: 1fr 2fr
+    .heroImg
+        background: #eee
+        position: relative
+        .profile-pic
+            width: 104px
+            height: 104px
+            background: #fff
+            border: 2px dotted
+            border-radius: 50%
+            margin: auto
+            bottom: 0
+            left: 50%
+            transform: translate(-50%, 50%)
+            position: absolute
+            overflow: hidden
+    .bottomHeader
+        background: #fff
+        display: grid
+        grid-template-rows: max-content max-content 1fr
+        align-items: center
+        justify-items: center
+        padding-top: 64px
+        h1
+            font-weight: normal
+            font-size: 18px
+        h3
+            font-weight: normal
+            font-size: 14px
+            color: rgba(0, 0, 0, 0.4)
+        .button-group
+            width: max-content
+            align-self: end
+            display: flex
+            justify-content: space-between
+            .button-wrapper
+                width: max-content
+                text-align: center
+                margin: 0 6px
+                &:hover span
+                    color: $color-dark
+                &:hover svg
+                    background: $color-dark
+                    fill: #fff
+                button
+                    margin: 0 12px
+                    width: 44px
+                    height: 44px
+                    border: 0
+                    outline: 0
+                    background: none
+                    border-radius: 50%
+                    overflow: hidden
+                    svg
+                        padding: 10px
+                        fill: #212121
+                        transition: all .2s ease
+
+                span
+                    font-size: 12px
+                    font-weight: bold
+                    position: relative
+                    top: -6px

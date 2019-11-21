@@ -1,0 +1,92 @@
+.post-grid
+    .createPost
+        max-width: 598px
+        margin: auto
+        height: 150px
+        border-radius: 14px
+        overflow: hidden
+        box-shadow: 0 2px 4px rgba(0,0,0,0.3)
+        background: #fff
+        margin-bottom: 20px
+        display: grid
+        grid-template-rows: 1fr max-content
+        textarea
+            outline: none
+            user-select: text
+            white-space: pre-wrap
+            overflow-wrap: break-word
+            padding: 20px
+            border: 0
+            outline: 0
+            font-size: 14px
+            resize: none
+        input[type='submit']
+            padding: 10px
+            font-weight: bolder
+            font-size: 14px
+            outline: 0
+            border: 0
+            background: rgba(#000,.1)
+            &:hover
+                background: rgba(#000,.2)
+
+    hr
+        width: 70%
+        margin: auto
+        margin-bottom: 6px
+        border: 1px solid rgba(#fff,.4)
+
+    .posts
+        overflow-y: scroll
+        text-align: center
+        .post
+            width: 250px
+            height: 300px
+            border-radius: 14px
+            padding: 10px
+            padding-bottom: 0
+            box-sizing: border-box
+            background: #fff
+            display: inline-grid
+            margin: 10px
+            text-align: center
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3)
+            overflow: hidden
+            position: relative
+            grid-template-rows: 50px 1fr 60px
+            .postHeader
+                text-align: left
+                padding: 4px 0
+                border-bottom: 1px solid rgba(#000,.2)
+                .email
+                .date
+                    font-size: 12px
+
+            .postBody
+                height: 180px
+                -webkit-box-sizing: border-box
+                box-sizing: border-box
+                overflow: hidden
+                border-bottom: 1px solid rgba(0,0,0,0.2)
+                p
+                    text-align: left
+                    height: 160px
+                    overflow: hidden
+                    margin: 8px
+            .postFooter
+                display: flex
+                justify-content: space-around
+                align-items: center
+                padding: 4px 0
+                button
+                    text-align: center
+                    border: 0
+                    outline: 0
+                    border-radius: 50%
+                    padding: 8px 10px
+                    background: none
+                    &:hover
+                        background: rgba(#000,.1)
+                        // color: #000
+                    svg
+                        fill: #424242
