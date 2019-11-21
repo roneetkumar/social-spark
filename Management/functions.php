@@ -69,6 +69,7 @@ function createPost($connection)
     $content = $_POST['content'];
     $user = $_SESSION['user'];
     $result = $user->setPost($content, null, $connection);
+
     if ($result) {
         header("Location: " . $GLOBALS['profilePage']);
     }
@@ -100,8 +101,30 @@ function accept($connection)
 
     $result = $user->acceptRequest($connection, $friendEmail);
     if ($result) {
-        message($friendEmail . " is now your friend");
+        header("location: " . $GLOBALS['profilePage']);
     }
+}
+
+function reject($connection)
+{
+    $user = $_SESSION['user'];
+    $friendEmail = $_POST['reject'];
+
+    $result = $user->rejectRequest($connection, $friendEmail);
+    if ($result) {
+        header("location: " . $GLOBALS['profilePage']);
+    }
+}
+
+function likePost($connection)
+{
+    $user = $_SESSION['user'];
+    $postID = $_POST['like'];
+    $result = $user->like($connection, $postID);
+    if ($result) {
+        header("location: " . $GLOBALS['profilePage']);
+    }
+
 }
 
 function message($string)

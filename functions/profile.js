@@ -30,7 +30,7 @@ const overlayClick = () => {
 const searchFriendList = (e) => {
 
     let searchString = e.target.value.toUpperCase();
-    let userList = allUsers.querySelectorAll('form span');
+    let userList = allUsers.querySelectorAll('.searchItem span');
 
     userList.forEach(user => {
         if (user.innerText.toUpperCase().includes(searchString)) {

@@ -6,6 +6,7 @@ class Post
     private $content;
     private $image;
     private $date;
+    private $likes;
 
     public function __construct()
     {
@@ -65,6 +66,37 @@ class Post
     public function getDate()
     {
         return $this->date;
+    }
+
+    public function getLikes()
+    {
+        // $sql = "SELECT likes from posts WHERE postID=?";
+        // $prepare = $connection->prepare($sql);
+        // $prepare->execute([$this->postID]);
+        // $likes = $prepare->fetch()['likes'];
+
+        // return $this->likes;
+    }
+
+    public function findPost($connection, $postID)
+    {
+        // $sql = "SELECT * FROM poast WHERE postID =?";
+        // $prepare = $connection->prepare($sql);
+        // $prepare->execute([$postID]);
+        // $tempUser = $prepare->fetch();
+
+        // if (sizeof($tempUser) > 0) {
+        //     $this->fname = $tempUser['postID'];
+        //     $this->lname = $tempUser['email'];
+        //     $this->email = $tempUser['content'];
+        //     $this->pass = $tempUser['image'];
+        //     $this->pass = $tempUser['date'];
+        //     $this->pass = $tempUser['likes'];
+        //     return true;
+        // } else {
+        //     return false;
+        // }
+
     }
 
     public function __toString()

@@ -10,7 +10,7 @@ class User
     private $pass;
     private $friends = [];
     private $posts = [];
-    private $pages = [];
+    // private $pages = [];
     private $requests = [];
 
     public function __construct($fname = null, $lname = null, $email = null, $pass = null)
@@ -95,7 +95,7 @@ class User
         $image = $tempPost->getImage();
         $date = $tempPost->getDate();
 
-        $sql = "INSERT INTO posts VALUES('$postID', '$this->email', '$content', '$image','$date')";
+        $sql = "INSERT INTO posts VALUES('$postID', '$this->email', '$content', '$image','$date','')";
         $result = $connection->exec($sql);
         return $result;
     }
@@ -170,7 +170,30 @@ class User
             $result = $connection->exec($sql);
             return $result;
         }
+    }
 
+    public function rejectRequest($connection, $friendEmail)
+    {
+        $sql = "DELETE FROM friends WHERE RelatedUserEmail=? AND RelatingUserEmail=?";
+        $prepare = $connection->prepare($sql);
+        $result = $prepare->execute([$this->email, $friendEmail]);
+        return $result;
+    }
+
+    public function like($connection, $postID)
+    {
+        $sql = "SELECT likes from posts WHERE postID=?";
+        $prepare = $connection->prepare($sql);
+        $prepare->execute([$postID]);
+        $likes = $prepare->fetch()['likes'];
+        $post = new Post();
+        $post = $post->findPost($connection, $postID);
+        // $likes =;
+
+        $sql = "UPDATE posts SET likes =? WHERE postID =?";
+        $prepare = $connection->prepare($sql);
+        $result = $prepare->execute([++$likes, $postID]);
+        return $result;
     }
 
     public function __toString()

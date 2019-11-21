@@ -13,17 +13,24 @@
             <?php $content = $post->getContent();?>
             <?php $image = $post->getImage();?>
             <?php $date = $post->getDate();?>
+            <?php $likes = $post->getLikes();?>
+
 
             <div class="post">
                 <div class="postHeader">
                     <h4 class="email"><?php echo $user->getFname() ?></h4>
                     <h5 class="date"><?php echo $date ?></h5>
+                    <h6 class='likes'> <?php echo $likes ?></h6>
                 </div>
                 <div class="postBody">
                     <img src="<?php echo $image ?>" alt="">
                     <p><?php echo "$content" ?></p>
                 </div>
-                <div class="postFooter"></div>
+                <form action="" method='POST' class="postFooter">
+                    <button name='like' value='<?php echo $id ?>'>LIKE</button>
+                    <button name='edit' value='<?php echo $id ?>'>EDIT</button>
+                    <button name='delete' value='<?php echo $id ?>'>DELETE</button>
+                </form>
             </div>
         <?php endforeach?>
 </div>

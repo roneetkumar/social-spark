@@ -104,10 +104,10 @@ body
         z-index: 2
         border-radius: 18px
         overflow: scroll
-        height: 90%
+        max-height: 90%
         top: 80px
         padding: 0 10px
-        form
+        .searchItem
             background: white
             border-radius: 12px
             padding: 10px
@@ -193,7 +193,7 @@ body
             box-shadow: 0 2px 4px rgba(0,0,0,0.3)
             border: 16px solid rgba(0,0,0,0)
             transition: all .3s ease-in-out
-            overflow: scroll
+            // overflow: scroll
             @media screen and ( max-width: 650px )
                 position: fixed
                 top: 0
@@ -253,11 +253,9 @@ body
                 overflow: hidden
                 box-shadow: 0 2px 4px rgba(0,0,0,0.3)
                 background: #fff
-                // margin: 0 10px
                 margin-bottom: 20px
                 display: grid
                 grid-template-rows: 1fr max-content
-                // margin-right: 0
                 textarea
                     outline: none
                     user-select: text
@@ -280,18 +278,14 @@ body
 
             .posts
                 overflow-y: scroll
-                // text-align: justify
-                // display: flex
-                // flex-flow: wrap
-                // justify-content: space-between
-                // grid-template-columns: repeat(auto-fill, minmax(250px, 1fr))
-                // grid-column-gap: 10px
-                // justify-items: center
                 text-align: center
                 .post
                     width: 250px
                     height: 300px
                     border-radius: 14px
+                    padding: 10px
+                    padding-bottom: 0
+                    box-sizing: border-box
                     background: #fff
                     display: inline-grid
                     margin: 10px
@@ -299,22 +293,34 @@ body
                     box-shadow: 0 2px 4px rgba(0,0,0,0.3)
                     overflow: hidden
                     position: relative
-                    grid-template-rows: 60px 1fr 60px
-                    // margin-right: 0
+                    grid-template-rows: 50px 1fr 50px
                     .postHeader
                         text-align: left
-                        padding: 10px 20px
+                        padding: 4px 0
                         border-bottom: 1px solid rgba(#000,.2)
                         .email
-
                         .date
                             font-size: 12px
 
                     .postBody
-                        padding: 10px 20px
+                        // padding: 10px 20px
                         text-align: left
                         border-bottom: 1px solid rgba(#000,.2)
-                        // background: pink
                     .postFooter
-                        // background: #000
-            .image
+                        display: flex
+                        justify-content: space-evenly
+                        align-items: center
+                        padding: 4px 0
+                        button
+                            padding: 6px
+                            width: 60px
+                            text-align: center
+                            border: 0
+                            border-radius: 4px
+                            outline: 0
+                            font-weight: bold
+                            background: #fff
+                            color: $color-dark
+                            &:hover
+                                background: $color-dark
+                                color: #000

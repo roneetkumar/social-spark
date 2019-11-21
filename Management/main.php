@@ -23,6 +23,18 @@ try {
     if (isset($_POST['accept'])) {
         accept($connection);
     }
+    if (isset($_POST['reject'])) {
+        reject($connection);
+    }
+    if (isset($_POST['like'])) {
+        likePost($connection);
+    }
+    if (isset($_POST['edit'])) {
+
+    }
+    if (isset($_POST['delete'])) {
+
+    }
 
 } catch (SQLExecption $error) {
     echo $connection->Error[2];

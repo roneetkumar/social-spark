@@ -36,7 +36,10 @@ session_destroy();
         </div>
 
         <!-- logo -->
-        <div include-html="./assets/logo.html" class="logo"></div>
+        <div class="logo">
+            <?php include "assets/logo.php"?>
+        </div>
+
 
         <!-- sign up card -->
         <div class="signUpCard">

@@ -1,11 +1,10 @@
 <?php
 echo "<div class='allUsers'>";
-
+echo "<form method='POST'>";
 foreach ($allUsers as $key => $value) {
     $friendName = $value->getFname() . " " . $value->getLname();
     $friendEmail = $value->getEmail();
-    echo "
-    <form method='POST'>
+    echo "  <div class='searchItem'>
                 <span>$friendName</span>
                 <button name='addFriend' value='$friendEmail'>
                     Add Friend
@@ -13,10 +12,10 @@ foreach ($allUsers as $key => $value) {
                 <button name='friendProfile' value='$friendEmail'>
                     View
                 </button>
-            </form>
-        ";
+             </div>
+                ";
 }
-
+echo "</form>";
 echo "</div>";
 ?>
 
