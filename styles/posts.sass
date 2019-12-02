@@ -1,3 +1,7 @@
+$color-light: #FFEB3B
+$color-dark: #FF9800
+$accent: #E51C23
+
 .post-grid
     .createPost
         max-width: 598px
@@ -58,9 +62,21 @@
                 text-align: left
                 padding: 4px 0
                 border-bottom: 1px solid rgba(#000,.2)
-                .email
+                display: inline-grid
+                grid-template-columns: 1fr 1fr 1fr
+                justify-items: center
+                .name
                 .date
-                    font-size: 12px
+                    justify-self: center
+                .likes
+                    width: 18px
+                    height: 18px
+                    background: $accent
+                    border-radius: 50%
+                    justify-self: right
+                    padding: 2px
+                    color: #fff
+                    text-align: center
 
             .postBody
                 height: 180px

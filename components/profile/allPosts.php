@@ -10,9 +10,6 @@
     <hr >
 
     <div class="posts">
-
-
-
         <?php $currentUser = $user->getEmail()?>
         <?php foreach ($allPosts as $key => $post): ?>
         <?php $id = $post->getPostID();?>
@@ -22,7 +19,6 @@
         <?php $likes = $post->getLikes($connection);?>
         <?php $canEdit = $post->getCanEdit();?>
 
-
         <?php $email = $post->getEmail();?>
         <?php $user = new User();?>
         <?php $user->setEmail($email);?>
@@ -31,9 +27,9 @@
 
         <div class="post">
             <div class="postHeader">
-                <h5 class="name"><?php echo $user->getFname() ?></h5>
                 <h5 class="date"><?php echo $date ?></h5>
-                <h6 class="likes"><?php echo $likes ?></h6>
+                <h5 class="name"><?php echo $user->getFname() ?></h5>
+                <h5 class="likes"><?php echo $likes ?></h5>
             </div>
             <div class="postBody">
             <?php if ($image != null): ?>

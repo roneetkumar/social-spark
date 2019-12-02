@@ -16,11 +16,16 @@ if (isset($_SESSION['user'])) {
             $email = $user->getEmail();
         }
     }
-}
-
-if (!isset($_SESSION['user'])) {
+} else {
     header("Location: $loginPage");
 }
+
+// if (isset($_SESSION['friend'])) {
+//     unset($_SESSION['friend']);
+// }
+
+// if (!isset($_SESSION['user'])) {
+// }
 ?>
 
 
@@ -53,7 +58,7 @@ if (!isset($_SESSION['user'])) {
             <?php include './components/profile/posts.php'?>
         </main>
 
-        <?php include "./components/profile/messages.php"?>
+        <?php include "./components/profile/message-list.php"?>
 
     </div>
 </body>

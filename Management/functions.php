@@ -1,12 +1,15 @@
 <?php
 
 require_once "classes/Post.php";
+require_once "classes/Message.php";
 
 $profilePage = '../profile.php';
 $profilePageV2 = './profile.php';
 $loginPage = './index.php';
 $errorPage = './404.html';
 
+header('Cache-Control: no cache'); //no cache
+session_cache_limiter('private_no_expire'); // works
 session_start();
 
 function signUp($connection)
@@ -72,8 +75,8 @@ function createPost($connection)
 {
     $content = $_POST['content'];
     $user = $_SESSION['user'];
-    $result = $user->setPost($content, null, $connection);
-
+    $image = $_POST['image'];
+    $result = $user->setPost($content, $image, $connection);
     if ($result) {
         header("location: " . $_SERVER['PHP_SELF']);
     }
@@ -92,6 +95,8 @@ function addFriend($connection)
 
     $result = $user->sendRequest($connection, $friendEmail);
     if ($result) {
+        $noti = "requestSent,$friendEmail";
+        $user->setNoti($connection, $noti);
         message("Request Sent");
     } else {
         message("can't sent request at the moment");
@@ -105,6 +110,8 @@ function accept($connection)
 
     $result = $user->acceptRequest($connection, $friendEmail);
     if ($result) {
+        $noti = "accept,$friendEmail";
+        $user->setNoti($connection, $noti);
         header("location: " . $_SERVER['PHP_SELF']);
     }
 }
@@ -116,6 +123,8 @@ function reject($connection)
 
     $result = $user->rejectRequest($connection, $friendEmail);
     if ($result) {
+        $noti = "reject,$friendEmail";
+        $user->setNoti($connection, $noti);
         header("location: " . $_SERVER['PHP_SELF']);
     }
 }
@@ -126,6 +135,9 @@ function likePost($connection)
     $postID = $_POST['like'];
     $result = $user->likePost($connection, $postID);
     if ($result) {
+        $type = "like";
+        $user->setNoti($connection, $type);
+
         header("location: " . $_SERVER['PHP_SELF']);
     }
 
@@ -145,11 +157,13 @@ function deletePost($connection)
 function editPost($connection)
 {
     $user = $_SESSION['user'];
-    $postID = $_POST['edit'];
+    $postID = $_POST['update'];
+    $newPost = $_POST['newPost'];
+
+    echo $newPost, $postID;
 
     // $result = $user->editPost($connection, $postID);
     // if ($result) {
-    header("location: " . $_SERVER['PHP_SELF']);
     // }
 
 }
@@ -191,4 +205,111 @@ function postsForFeed($connection = null)
     }
     return $posts;
 
+}
+
+function sendMessage($connection)
+{
+    $_SESSION['friend'] = $_POST['send'];
+
+    $friend = $_SESSION['friend'];
+    $user = $_SESSION['user'];
+    $message = $_POST['content'];
+
+    $result = $user->sendMessage($connection, $friend, $message);
+
+    if ($result) {
+        header("location: " . $_SERVER['PHP_SELF']);
+    }
+
+}
+
+function changepassword($connection)
+{
+    $newPass = $_POST['nPass'];
+    $rePass = $_POST['rPass'];
+    $oldPass = $_POST['oPass'];
+
+    $user = $_SESSION['user'];
+
+    if ($newPass == $rePass) {
+        if ($oldPass == $user->getPassword()) {
+            $user->setPassword($newPass);
+            $done = $user->changePassword($connection);
+            echo $done;
+            if ($done) {
+
+                echo "password changed";
+            }
+        } else {
+            echo "wrong old password";
+        }
+    } else {
+        echo "new password do not match";
+    }
+
+}
+
+function deleteAccount($connection)
+{
+    $user = $_SESSION['user'];
+    $result = $user->deleteAccount($connection);
+    if ($result) {
+        unset($_SESSION['user']);
+        session_destroy();
+        header("location: ./index.php");
+
+    }
+
+}
+
+function clearData($connection)
+{
+    $user = $_SESSION['user'];
+    $result = $user->clearData($connection);
+    if ($result) {
+        unset($_SESSION['user']);
+        session_destroy();
+        header("location: ./index.php");
+
+    }
+
+}
+
+function displayMessages($connection)
+{
+    $email = $_SESSION['user']->getEmail();
+    // echo $email;
+    $unread = [];
+    $sql = 'SELECT DISTINCT fromUser, toUser FROM message WHERE toUser = ? AND seen = ? ORDER BY DATE';
+    $prepare = $connection->prepare($sql);
+    $prepare->execute([$email, 0]);
+    $result = $prepare->fetchAll();
+
+    foreach ($result as $key => $value) {
+        if (sizeof($result) > 0) {
+            $from = $value['fromUser'];
+            $to = $value['toUser'];
+            $unread[$key] = new Message($from, $to, "", "");
+
+        } else {
+            return null;
+        }
+    }
+    return $unread;
+}
+
+function unsetMessages($connection, $friend)
+{
+    $email = $_SESSION['user']->getEmail();
+
+    $sql = "UPDATE message SET seen = ? WHERE fromUser = ? AND toUser=?";
+    $prepare = $connection->prepare($sql);
+    $prepare->execute([1, $friend, $email]);
+}
+
+function displayNotification($connection)
+{
+    $email = $_SESSION['user']->getEmail();
+
+    $sql = "SELECT * FROM ";
 }

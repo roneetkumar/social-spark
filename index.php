@@ -7,7 +7,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="styles/index.min.css">
-    <script src="./functions/includeScript.js"></script>
     <script src="functions/index.js" defer></script>
     <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" href="./assets/favicon.ico">

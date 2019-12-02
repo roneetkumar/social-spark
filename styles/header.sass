@@ -14,6 +14,18 @@ header
     .heroImg
         background: #eee
         position: relative
+        .settings
+            svg
+                position: absolute
+                right: 0
+                margin: 5px
+                padding: 10px
+                border-radius: 50%
+                transition: transform .3s ease-in-out
+                &:hover
+                    background: rgba(#000,.1)
+                    transform: rotate(180deg)
+
         .profile-pic
             width: 104px
             height: 104px
@@ -49,11 +61,24 @@ header
                 width: max-content
                 text-align: center
                 margin: 0 6px
+                position: relative
                 &:hover span
                     color: $color-dark
                 &:hover svg
                     background: $color-dark
                     fill: #fff
+                .count-request,.count-message
+                    position: absolute
+                    right: 6px
+                    top: -6px
+                    background: red
+                    width: 18px
+                    height: 18px
+                    border-radius: 50%
+                    font-weight: bold
+                    color: white
+                    text-align: center
+                    font-size: 14px
                 button
                     margin: 0 12px
                     width: 44px

@@ -1,6 +1,7 @@
 <?php
 
 include_once 'Post.php';
+include_once 'Message.php';
 
 class User
 {
@@ -10,7 +11,7 @@ class User
     private $pass;
     private $friends = [];
     private $posts = [];
-    // private $pages = [];
+    private $messages = [];
     private $requests = [];
 
     public function __construct($fname = null, $lname = null, $email = null, $pass = null)
@@ -24,6 +25,11 @@ class User
     public function setEmail($email)
     {
         $this->email = $email;
+    }
+
+    public function setPassword($pass)
+    {
+        $this->pass = $pass;
     }
 
     public function getEmail()
@@ -220,8 +226,94 @@ class User
         return $result;
     }
 
+    public function setMessage($connection, $friend)
+    {
+
+    }
+
+    public function getMessage($connection, $friend)
+    {
+        $this->messages = [];
+        $sql = "SELECT * from message WHERE (fromUser=? AND toUser=?) OR (fromUser=? AND toUser=?) ORDER BY date";
+        $prepare = $connection->prepare($sql);
+        $prepare->execute([$this->email, $friend, $friend, $this->email]);
+        $result = $prepare->fetchAll();
+
+        foreach ($result as $key => $value) {
+            if (sizeof($result) > 0) {
+                $from = $value['fromUser'];
+                $to = $value['toUser'];
+                $message = $value['message'];
+                $date = $value['date'];
+
+                $this->messages[$key] = new Message($from, $to, $message, $date);
+            } else {
+                return null;
+            }
+        }
+        return $this->messages;
+    }
+
+    public function sendMessage($connection, $friend, $message)
+    {
+        $date = date("Y-m-d h:i:s A");
+        $sql = "INSERT INTO message VALUES('$this->email','$friend','$message','$date', '0')";
+        $result = $connection->exec($sql);
+        return $result;
+    }
+
+    public function setNoti($connection, $noti)
+    {
+
+        $sql = "INSERT INTO notifications VALUES('$this->email','$noti')";
+        $result = $connection->exec($sql);
+        return $result;
+    }
+
+    public function unSetNoti($connection, $noti)
+    {
+        $sql = "DELETE FROM notifications WHERE email=? AND type=?";
+        $prepare = $connection->prepare($sql);
+        $result = $prepare->execute([$this->email, $noti]);
+        return $result;
+    }
+
+    public function changePassword($connection)
+    {
+        $sql = "UPDATE user SET Password=? WHERE Email=?";
+        $prepare = $connection->prepare($sql);
+        $result = $prepare->execute([md5($this->pass), $this->email]);
+        return $result;
+    }
+
+    public function deleteAccount($connection)
+    {
+        $sql = "DELETE FROM user WHERE Email=?";
+        $prepare = $connection->prepare($sql);
+        $result = $prepare->execute([$this->email]);
+        return $result;
+    }
+
+    public function clearData($connection)
+    {
+
+        $sql = "DELETE FROM posts WHERE email=?";
+
+        $prepare = $connection->prepare($sql);
+        $result = $prepare->execute([$this->email]);
+
+        if ($result) {
+            $sql = "DELETE FROM message WHERE fromUser=?";
+            $prepare = $connection->prepare($sql);
+            $result = $prepare->execute([$this->email]);
+            return $result;
+        }
+
+    }
+
     public function __toString()
     {
         return "$this->fname,$this->lname, $this->email";
     }
+
 }

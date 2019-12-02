@@ -4,8 +4,6 @@ const __ = ele => document.querySelectorAll(ele)
 
 // ---------------------------------------------------------
 
-
-
 const body = _('body');
 const overlay = _('.overlay');
 const searchIcon = _('.search-icon');

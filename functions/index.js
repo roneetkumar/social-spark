@@ -1,4 +1,3 @@
-includeHTML();
 
 console.log('hello');
 const _ = ele => document.querySelector(ele)

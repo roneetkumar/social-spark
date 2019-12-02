@@ -42,7 +42,7 @@ class Post
         $this->postID = rand(10000, 99999);
         $this->content = $content;
         $this->image = $image;
-        $this->date = date("Y-m-d h:i:sa");
+        $this->date = date("Y-m-d h:i:s A");
         $this->canEdit = false;
 
     }

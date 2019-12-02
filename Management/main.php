@@ -1,8 +1,8 @@
 <?php
 
-include_once 'Classes/User.php';
-include_once 'dbconfig.php';
-include_once 'functions.php';
+require_once 'Classes/User.php';
+require_once 'dbconfig.php';
+require_once 'functions.php';
 
 try {
     $connection = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
@@ -30,7 +30,7 @@ try {
     if (isset($_POST['like'])) {
         likePost($connection);
     }
-    if (isset($_POST['edit'])) {
+    if (isset($_POST['update'])) {
         editPost($connection);
     }
     if (isset($_POST['delete'])) {
@@ -38,6 +38,19 @@ try {
     }
     if (isset($_POST['removeFriend'])) {
         removeFriend($connection);
+    }
+    if (isset($_POST['send'])) {
+        sendMessage($connection);
+    }
+    if (isset($_POST['cPass'])) {
+        changepassword($connection);
+    }
+
+    if (isset($_POST['dAcc'])) {
+        deleteAccount($connection);
+    }
+    if (isset($_POST['clearData'])) {
+        clearData($connection);
     }
 
 } catch (SQLExecption $error) {

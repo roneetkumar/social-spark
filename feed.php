@@ -16,11 +16,13 @@ if (isset($_SESSION['user'])) {
             $email = $user->getEmail();
         }
     }
-}
-
-if (!isset($_SESSION['user'])) {
+} else {
     header("Location: $loginPage");
 }
+
+// if (!isset($_SESSION['user'])) {
+//     header("Location: $loginPage");
+// }
 ?>
 
 
@@ -42,7 +44,6 @@ if (!isset($_SESSION['user'])) {
 
         <div class="overlay"></div>
 
-
         <?php include './components/profile/search-bar.php'?>
 
         <!-- logo -->
@@ -53,11 +54,10 @@ if (!isset($_SESSION['user'])) {
             <h1>Social<br>Spark</h1>
         </div>
 
-
         <main>
             <?php include './components/profile/allPosts.php'?>
         </main>
-        <h4>Copyright &copy; 2019 All rights reserved</h4>
+        <h5 class="copy">Copyright &copy; 2019 All rights reserved</h5>
     </div>
 </body>
 </html>

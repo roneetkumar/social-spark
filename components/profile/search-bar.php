@@ -22,17 +22,17 @@
 </div>
 
 <div class="search-bar">
-<?php if (isset($_POST['feed'])): ?>
-    <form action="./profile.php" method="post">
-        <button class="profile">
-            <?php include './components/svg/profile.php'?>
+    <?php if (isset($_POST['feed'])): ?>
+        <form action="./profile.php" method="post">
+            <button class="profile">
+                <?php include './components/svg/profile.php'?>
+            </button>
+        </form>
+    <?php else: ?>
+        <button class="menu">
+            <?php include './components/svg/menu.php'?>
         </button>
-    </form>
-<?php else: ?>
-    <button class="menu">
-        <?php include './components/svg/menu.php'?>
-    </button>
-<?php endif?>
+    <?php endif?>
 
     <div class="search">
         <?php include './components/svg/search.php'?>
