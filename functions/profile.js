@@ -25,21 +25,27 @@ const messageCount = _('.count-message');
 
 const editBtn = __('.editPost');
 
-const editForm = _('.editForm');
-const fakeForm = _('.fakeForm');
-console.log(fakeForm);
+const editForm = __('.editForm');
+// const fakeForm = _('.fakeForm');
+console.log(editForm);
 
 
 editBtn.forEach(btn => {
     btn.onclick = () => {
         const post = btn.parentElement.parentElement;
         post.querySelector('.postBody p').setAttribute("contenteditable", "true");
-        post.querySelector('.edit').style.display = 'block';
+        post.querySelector('.edit').style.display = 'flex';
         post.querySelector('.notEdit').style.display = 'none';
-
-
     }
 });
+
+
+
+editForm.forEach(form => {
+    form.onsubmit = e => updateForm(e);
+})
+
+
 
 const updateForm = (e) => {
     // e.preventDefault();
@@ -48,7 +54,7 @@ const updateForm = (e) => {
     let content = post.querySelector('.postBody p').innerText;
     console.log(content);
 
-    fakeForm.value = content;
+    e.target.querySelector('.fakeForm').value = content;
     return true;
 }
 
@@ -151,4 +157,3 @@ search.onkeyup = e => searchFriendList(e);
 menu.onclick = openFriends;
 console.log(requestCount);
 
-editForm.onsubmit = e => updateForm(e);

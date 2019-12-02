@@ -160,11 +160,10 @@ function editPost($connection)
     $postID = $_POST['update'];
     $newPost = $_POST['newPost'];
 
-    echo $newPost, $postID;
-
-    // $result = $user->editPost($connection, $postID);
-    // if ($result) {
-    // }
+    $result = $user->editPost($connection, $postID, $newPost);
+    if ($result) {
+        header("location: " . $_SERVER['PHP_SELF']);
+    }
 
 }
 

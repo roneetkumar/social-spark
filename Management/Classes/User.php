@@ -311,6 +311,15 @@ class User
 
     }
 
+    public function editPost($connection, $postID, $newPost)
+    {
+        $sql = "UPDATE posts SET content=? WHERE postID=?";
+
+        $prepare = $connection->prepare($sql);
+        $result = $prepare->execute([$newPost,$postID]);
+        return $result;
+    }
+
     public function __toString()
     {
         return "$this->fname,$this->lname, $this->email";

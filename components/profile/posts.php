@@ -45,10 +45,10 @@
                 </form>
                 </div>
                 <div class="postFooter edit" style='display:none'>
-                <form class='editForm' action="" method='POST' >
-                    <textarea name='newPost' style="display:none" class="fakeForm" cols="30" rows="10"></textarea>
-                    <button name='update' value='<?php echo $id ?>'><?php include "./components/svg/delete.php"?></button>
-                </form>
+                    <form class='editForm' action="" method='POST' >
+                        <textarea name='newPost' style="display:none" class="fakeForm" cols="30" rows="10"></textarea>
+                        <button name='update' value='<?php echo $id ?>'><?php include "./components/svg/save.php"?></button>
+                    </form>
                 </div>
             </div>
         <?php endforeach?>
