@@ -53,8 +53,9 @@
             </div>
         <?php endforeach?>
 
-
-        <h2>Saved Posts</h2>
+        <?php if ($user->getSavedPosts($connection) != null): ?>
+        <br><br><br><br>
+        <h2>Saved Posts</h2><br>
         <?php foreach ($user->getSavedPosts($connection) as $key => $post): ?>
         <?php $id = $post->getPostID();?>
         <?php $content = $post->getContent();?>
@@ -90,5 +91,6 @@
             </div>
         <?php endforeach?>
     </div>
+    <?php endif?>
 </div>
 

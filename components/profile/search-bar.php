@@ -22,7 +22,7 @@
 </div>
 
 <div class="search-bar">
-    <?php if (isset($_POST['feed'])): ?>
+    <?php if (basename($_SERVER['PHP_SELF']) == 'feed.php'): ?>
         <form action="./profile.php" method="post">
             <button class="profile">
                 <?php include './components/svg/profile.php'?>

@@ -74,7 +74,7 @@ form.wrapper
             border-radius: 18px
             justify-self: left
             box-sizing: border-box
-            font-size: 14px
+            font-size: 16px
             margin: 10px
             background: #fff
             box-shadow: 0 2px 4px rgba(#000,.2)
@@ -89,9 +89,14 @@ form.wrapper
                 width: 15px
                 height: 15px
                 background: #ffffff
-                border-radius: 50% 50% 0px
+                border-radius: 24px 0 0 0
                 -webkit-transform: rotate(46deg)
                 transform: rotate(136deg)
+
+            h1
+                font-size: 10px
+                color: #37474F
+                margin-bottom: 4px
 
         .to
             justify-self: right
@@ -102,18 +107,19 @@ form.wrapper
                 transform: rotate(-46px)
 
     span.toUser,span.fromUser
-        webkit-transform: translateY(-50%)
-        transform: translateY(-50%) rotate(-90deg)
         position: absolute
         top: 50%
-        left: -18px
+        left: 5px
         font-weight: bold
+        writing-mode: vertical-rl
+        text-orientation: mixed
+        transform: translateY(-50%) rotate(180deg)
 
     span.fromUser
-        transform: translateY(-50%) rotate(90deg)
         left: initial
-        right: -18px
-
+        right: 5px
+        transform: translateY(-50%) rotate(0deg)
+        // top: 306px
     .messageWrapper
         background: #fff
         display: -webkit-box

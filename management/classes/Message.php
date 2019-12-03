@@ -13,12 +13,22 @@ class Message
         $this->from = $from;
         $this->to = $to;
         $this->message = $message;
-        $this->date = date("Y-m-d h:i:s A");
+        $this->date = $date;
     }
 
     public function getMessageFrom()
     {
+
         return $this->from;
+    }
+
+    public function findName($connection, $email)
+    {
+        $sql = "SELECT FirstName,LastName from user WHERE email=?";
+        $prepare = $connection->prepare($sql);
+        $prepare->execute([$email]);
+        $tempName = $prepare->fetch();
+        return $tempName['FirstName'] . " " . $tempName['LastName'];
     }
 
     public function getMessageTo()

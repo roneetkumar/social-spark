@@ -136,7 +136,7 @@ function likePost($connection)
     $result = $user->likePost($connection, $postID);
     if ($result) {
         $type = "like";
-        $user->setNoti($connection, $type);
+        // $user->setNoti($connection, $type);
 
         header("location: " . $_SERVER['PHP_SELF']);
     }

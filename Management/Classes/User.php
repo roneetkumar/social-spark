@@ -263,10 +263,10 @@ class User
         return $result;
     }
 
-    public function setNoti($connection, $noti)
+    public function setNoti($connection, $noti, $to)
     {
 
-        $sql = "INSERT INTO notifications VALUES('$this->email','$noti')";
+        $sql = "INSERT INTO notifications VALUES('$this->email','$to','$noti')";
         $result = $connection->exec($sql);
         return $result;
     }
@@ -330,6 +330,8 @@ class User
 
     public function getSavedPosts($connection)
     {
+        $this->savedPosts = [];
+
         $sql1 = "SELECT * FROM posts WHERE postID IN (SELECT postID FROM savedposts WHERE email =?) ORDER BY date DESC";
         $prepare = $connection->prepare($sql1);
         $prepare->execute([$this->email]);
@@ -353,7 +355,6 @@ class User
         $prepare = $connection->prepare($sql);
         $result = $prepare->execute([$postID]);
         return $result;
-
     }
 
     public function __toString()

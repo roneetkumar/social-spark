@@ -22,7 +22,6 @@
     <button class="tab" type="submit" name="theme">
         <?php include './components/svg/theme.php'?>
         <span>Change Theme</span>
-
     </button>
     <button class="tab" type="submit" name="deleteAcc">
         <?php include './components/svg/deleteAcc.php'?>
@@ -79,6 +78,12 @@
 <?php if (isset($_POST['theme'])): ?>
      <h1>Change Theme</h1>
 
+    <form method="POST" action="">
+            <input type="radio" name="theme" id="">
+            <input type="radio" name="theme" id="">
+        </form>
+
+
 <?php endif?>
 
 <?php if (isset($_POST['deleteAcc'])): ?>
@@ -98,6 +103,9 @@
 <?php endif?>
 
 </div>
+
+
+
 
 </body>
 </html>

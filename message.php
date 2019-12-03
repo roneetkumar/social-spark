@@ -15,7 +15,10 @@ if (isset($_POST['friend']) || isset($_SESSION['friend'])) {
     unsetMessages($connection, $friend);
 
     $allMessages = $user->getMessage($connection, $friend);
-    $from = $user->getEmail();
+
+    $from = Message::findName($connection, $user->getEmail());
+    $to = Message::findName($connection, $friend);
+
 } else {
     header("Location: $profilePageV2");
 }
@@ -38,8 +41,8 @@ if (isset($_POST['friend']) || isset($_SESSION['friend'])) {
         </button>
     </form>
     <form class='wrapper' action="" method="POST">
-        <!-- <span class="toUser"><?php echo $friend ?></span> -->
-        <!-- <span class="fromUser"><?php echo $user->getEmail() ?></span> -->
+         <span class="toUser"><?php echo $to ?></span>
+         <span class="fromUser"><?php echo $from ?></span>
 
         <div class="messages">
 
@@ -47,13 +50,20 @@ if (isset($_POST['friend']) || isset($_SESSION['friend'])) {
 
         <?php if ($friend == $messsage->getMessageFrom()): ?>
             <div class="from">
-            <?php echo $messsage->getMessage() ?>
-
+                <h1>
+                    <?php echo $messsage->getMessageDate() ?>
+                </h1>
+                <?php echo $messsage->getMessage() ?>
             </div>
         <?php endif?>
 
         <?php if ($friend == $messsage->getMessageTo()): ?>
-            <div class="to"><?php echo $messsage->getMessage() ?></div>
+            <div class="to">
+                <h1>
+                <?php echo $messsage->getMessageDate() ?>
+                </h1>
+                <?php echo $messsage->getMessage() ?>
+            </div>
         <?php endif?>
 
         <?php endforeach?>
@@ -71,9 +81,6 @@ if (isset($_POST['friend']) || isset($_SESSION['friend'])) {
     </form>
 
 </body>
-
-
-
 
 
 
