@@ -312,3 +312,27 @@ function displayNotification($connection)
 
     $sql = "SELECT * FROM ";
 }
+
+function savePost($connection)
+{
+    $postId = $_POST['save'];
+    $user = $_SESSION['user'];
+    $result = $user->savePost($connection, $postId);
+    if ($result) {
+        header("location: " . $GLOBALS['profilePageV2']);
+    } else {
+        message("Post already Saved");
+    }
+
+}
+
+function deleteSaved($connection)
+{
+    $postID = $_POST['deleteSaved'];
+    $user = $_SESSION['user'];
+    $result = $user->deleteSavedPost($connection, $postID);
+    if ($result) {
+        header("location: " . $_SERVER['PHP_SELF']);
+    }
+
+}

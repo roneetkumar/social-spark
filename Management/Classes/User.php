@@ -13,6 +13,7 @@ class User
     private $posts = [];
     private $messages = [];
     private $requests = [];
+    private $savedPosts = [];
 
     public function __construct($fname = null, $lname = null, $email = null, $pass = null)
     {
@@ -316,13 +317,47 @@ class User
         $sql = "UPDATE posts SET content=? WHERE postID=?";
 
         $prepare = $connection->prepare($sql);
-        $result = $prepare->execute([$newPost,$postID]);
+        $result = $prepare->execute([$newPost, $postID]);
         return $result;
+    }
+
+    public function savePost($connection, $postID)
+    {
+        $sql = "INSERT INTO savedposts VALUES ('$postID','$this->email')";
+        $result = $connection->exec($sql);
+        return $result;
+    }
+
+    public function getSavedPosts($connection)
+    {
+        $sql1 = "SELECT * FROM posts WHERE postID IN (SELECT postID FROM savedposts WHERE email =?) ORDER BY date DESC";
+        $prepare = $connection->prepare($sql1);
+        $prepare->execute([$this->email]);
+        $tempPost = $prepare->fetchAll();
+
+        foreach ($tempPost as $key => $post) {
+            $email = $post['email'];
+            $postID = $post['postID'];
+            $content = $post['content'];
+            $image = $post['image'];
+            $date = $post['date'];
+            $this->savedPosts[$key] = new Post($postID, $email, $content, $image, $date);
+            $this->savedPosts[$key]->setPostedBy($connection);
+        }
+        return $this->savedPosts;
+    }
+
+    public function deleteSavedPost($connection, $postID)
+    {
+        $sql = "DELETE FROM savedposts WHERE postID=?";
+        $prepare = $connection->prepare($sql);
+        $result = $prepare->execute([$postID]);
+        return $result;
+
     }
 
     public function __toString()
     {
         return "$this->fname,$this->lname, $this->email";
     }
-
 }

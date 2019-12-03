@@ -8,7 +8,7 @@ class Post
     private $date;
     private $likes;
     private $email;
-    private $canEdit;
+    private $postedBy;
 
     public function __construct()
     {
@@ -56,6 +56,20 @@ class Post
         $this->date = $date;
         $this->canEdit = false;
 
+    }
+
+    public function setPostedBy($connection)
+    {
+        $sql = "SELECT FirstName from user WHERE email=?";
+        $prepare = $connection->prepare($sql);
+        $prepare->execute([$this->email]);
+        $tempPost = $prepare->fetch();
+        $this->postedBy = $tempPost['FirstName'];
+    }
+
+    public function getPostedBy()
+    {
+        return $this->postedBy;
     }
 
     public function getPostID()

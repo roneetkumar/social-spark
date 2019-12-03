@@ -52,6 +52,12 @@ try {
     if (isset($_POST['clearData'])) {
         clearData($connection);
     }
+    if (isset($_POST['save'])) {
+        savePost($connection);
+    }
+    if (isset($_POST['deleteSaved'])) {
+        deleteSaved($connection);
+    }
 
 } catch (SQLExecption $error) {
     echo $connection->Error[2];

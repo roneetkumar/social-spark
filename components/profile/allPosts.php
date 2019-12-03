@@ -41,10 +41,15 @@
                 <button name='like' value='<?php echo $id ?>'>
                 <?php include "./components/svg/like.php"?>
                 </button>
-                    <?php if ($currentUser == $email): ?>
-                        <button class='editPost' name='edit' value='<?php echo $id ?>'><?php include "./components/svg/edit.php"?></button>
-                        <button name='delete' value='<?php echo $id ?>'><?php include "./components/svg/delete.php"?></button>
-                    <?php endif?>
+
+                <?php if ($currentUser == $email): ?>
+                    <button class='editPost' name='edit' value='<?php echo $id ?>'><?php include "./components/svg/edit.php"?></button>
+                    <button name='delete' value='<?php echo $id ?>'><?php include "./components/svg/delete.php"?></button>
+                <?php else: ?>
+                    <button name='save' value='<?php echo $id ?>'>
+                    <?php include "./components/svg/save.php"?>
+                    </button>
+                <?php endif?>
             </form>
         </div>
         <?php endforeach?>
