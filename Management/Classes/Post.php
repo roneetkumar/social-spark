@@ -112,6 +112,10 @@ class Post
     {
         $this->email = $email;
     }
+    public function setPostID($id)
+    {
+        $this->postID = $id;
+    }
 
     public function findPost($connection, $postID)
     {

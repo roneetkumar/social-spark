@@ -16,6 +16,7 @@ const requests = _('.requests');
 const requestsList = _('.request-list');
 const messages = _('.messages');
 const messagesList = _('.message-list');
+
 const allUsers = _('.allUsers')
 const messageFriend = __('.friendsList .message');
 const requestLength = requestsList.querySelectorAll('.friend').length;

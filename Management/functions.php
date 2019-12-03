@@ -111,7 +111,7 @@ function accept($connection)
     $result = $user->acceptRequest($connection, $friendEmail);
     if ($result) {
         $noti = "accept,$friendEmail";
-        $user->setNoti($connection, $noti);
+        $user->setNoti($connection, $noti, $to);
         header("location: " . $_SERVER['PHP_SELF']);
     }
 }
@@ -124,7 +124,8 @@ function reject($connection)
     $result = $user->rejectRequest($connection, $friendEmail);
     if ($result) {
         $noti = "reject,$friendEmail";
-        $user->setNoti($connection, $noti);
+        $user->setNoti($connection, $type, $to);
+
         header("location: " . $_SERVER['PHP_SELF']);
     }
 }
@@ -133,10 +134,11 @@ function likePost($connection)
 {
     $user = $_SESSION['user'];
     $postID = $_POST['like'];
+
     $result = $user->likePost($connection, $postID);
     if ($result) {
-        $type = "like";
-        // $user->setNoti($connection, $type);
+        $type = "like" . "$postID";
+        $user->setNoti($connection, $type, $to);
 
         header("location: " . $_SERVER['PHP_SELF']);
     }
@@ -185,10 +187,12 @@ function message($string)
 
 function postsForFeed($connection = null)
 {
+    $user = $_SESSION['user'];
+    $email = $user->getEmail();
     $posts = [];
-    $sql = "SELECT * FROM posts ORDER BY date DESC";
+    $sql = "SELECT * FROM posts WHERE email IN (SELECT RelatedUserEmail FROM friends WHERE RelatingUserEmail=?) ORDER BY date DESC";
     $prepare = $connection->prepare($sql);
-    $prepare->execute();
+    $prepare->execute([$email]);
     $result = $prepare->fetchAll();
 
     foreach ($result as $key => $tempPost) {
@@ -198,7 +202,6 @@ function postsForFeed($connection = null)
             $content = $tempPost['content'];
             $image = $tempPost['image'];
             $date = $tempPost['date'];
-
             $posts[$key] = new Post($postID, $email, $content, $image, $date);
         }
     }
@@ -213,13 +216,11 @@ function sendMessage($connection)
     $friend = $_SESSION['friend'];
     $user = $_SESSION['user'];
     $message = $_POST['content'];
-
     $result = $user->sendMessage($connection, $friend, $message);
 
     if ($result) {
         header("location: " . $_SERVER['PHP_SELF']);
     }
-
 }
 
 function changepassword($connection)
@@ -269,7 +270,19 @@ function clearData($connection)
         unset($_SESSION['user']);
         session_destroy();
         header("location: ./index.php");
+    }
 
+}
+
+function changeTheme($connection)
+{
+    $user = $_SESSION['user'];
+    $theme = $_POST['color'];
+
+    $result = $user->changeTheme($connection, $theme);
+
+    if ($result) {
+        header("location: ./profile.php");
     }
 
 }

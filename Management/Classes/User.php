@@ -114,7 +114,7 @@ class User
         $email = $this->email;
         $pass = $this->pass;
 
-        $sql = "INSERT INTO user VALUES('$fname', '$lname', '$email', '$pass')";
+        $sql = "INSERT INTO user VALUES('$fname', '$lname', '$email', '$pass','')";
         $result = $connection->exec($sql);
         return $result;
     }
@@ -263,10 +263,11 @@ class User
         return $result;
     }
 
-    public function setNoti($connection, $noti, $to)
+    public function setNoti($connection, $noti)
     {
+        $date = date("Y-m-d h:i:s A");
 
-        $sql = "INSERT INTO notifications VALUES('$this->email','$to','$noti')";
+        $sql = "INSERT INTO notifications VALUES('$this->email','$noti','$date')";
         $result = $connection->exec($sql);
         return $result;
     }
@@ -309,6 +310,15 @@ class User
             $result = $prepare->execute([$this->email]);
             return $result;
         }
+
+    }
+
+    public function changeTheme($connection, $theme)
+    {
+        $sql = "UPDATE user SET theme=? WHERE Email=?";
+        $prepare = $connection->prepare($sql);
+        $result = $prepare->execute([$theme, $this->email]);
+        return $result;
 
     }
 

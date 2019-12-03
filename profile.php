@@ -46,7 +46,6 @@ if (isset($_SESSION['user'])) {
         <div class="overlay"></div>
         <!-- SEARCHBAR -->
         <?php include './components/profile/search-bar.php'?>
-
         <!-- HEADER -->
         <?php include './components/profile/header.php'?>
 

@@ -60,7 +60,7 @@
 <div class="switch-wrapper">
 <?php if (isset($_POST['pass'])): ?>
     <h1>Change Password</h1>
-    <form action="" method="POST">
+    <form class='changepass' action="" method="POST">
         <input type="text" name="oPass" placeholder="Enter old password"><br>
         <input type="password" name="nPass"  placeholder="Enter new password"><br>
         <input type="password" name="rPass"  placeholder="Re-enter new password"><br>
@@ -70,18 +70,17 @@
 
 <?php endif?>
 
-
-
-
-
-
 <?php if (isset($_POST['theme'])): ?>
      <h1>Change Theme</h1>
 
-    <form method="POST" action="">
-            <input type="radio" name="theme" id="">
-            <input type="radio" name="theme" id="">
-        </form>
+    <form action="" method="POST">
+            <input type="radio" name="color" value="dark">
+            <label for="color">Dark</label><br><br>
+            <input type="radio" name="color" value="light">
+            <label for="color">Light</label>
+            <br><br><br><br>
+            <button type="submit" name='color'>Apply</button>
+    </form>
 
 
 <?php endif?>
@@ -103,9 +102,6 @@
 <?php endif?>
 
 </div>
-
-
-
 
 </body>
 </html>

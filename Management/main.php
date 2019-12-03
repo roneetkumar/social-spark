@@ -55,6 +55,11 @@ try {
     if (isset($_POST['save'])) {
         savePost($connection);
     }
+
+    if (isset($_POST['color'])) {
+        changeTheme($connection);
+    }
+
     if (isset($_POST['deleteSaved'])) {
         deleteSaved($connection);
     }
