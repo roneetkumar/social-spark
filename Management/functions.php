@@ -85,7 +85,7 @@ function createPost($connection)
 if (isset($_POST['logout'])) {
     unset($_SESSION['user']);
     session_destroy();
-    header("location: " . $_SERVER['PHP_SELF']);
+    header("location: " . $loginPage);
 }
 
 function addFriend($connection)
@@ -187,12 +187,16 @@ function message($string)
 
 function postsForFeed($connection = null)
 {
-    $user = $_SESSION['user'];
-    $email = $user->getEmail();
+    // $user = $_SESSION['user'];
+    // $email = $user->getEmail();
     $posts = [];
-    $sql = "SELECT * FROM posts WHERE email IN (SELECT RelatedUserEmail FROM friends WHERE RelatingUserEmail=?) ORDER BY date DESC";
+    // $sql = "SELECT * FROM posts WHERE email IN (SELECT RelatedUserEmail FROM friends WHERE RelatingUserEmail=?) ORDER BY date DESC";
+    $sql = "SELECT * FROM posts";
+
     $prepare = $connection->prepare($sql);
-    $prepare->execute([$email]);
+    // $prepare->execute([$email]);
+    $prepare->execute();
+
     $result = $prepare->fetchAll();
 
     foreach ($result as $key => $tempPost) {

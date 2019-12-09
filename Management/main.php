@@ -6,8 +6,6 @@ require_once 'functions.php';
 
 try {
     $connection = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
-    $allUsers = findAllUsers($connection);
-    $allPosts = postsForFeed($connection);
 
     if (isset($_POST['signUp'])) {
         signUp($connection);
@@ -45,7 +43,6 @@ try {
     if (isset($_POST['cPass'])) {
         changepassword($connection);
     }
-
     if (isset($_POST['dAcc'])) {
         deleteAccount($connection);
     }
@@ -63,6 +60,9 @@ try {
     if (isset($_POST['deleteSaved'])) {
         deleteSaved($connection);
     }
+
+    $allUsers = findAllUsers($connection);
+    $allPosts = postsForFeed($connection);
 
 } catch (SQLExecption $error) {
     echo $connection->Error[2];

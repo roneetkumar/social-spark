@@ -33,13 +33,15 @@
         <span>Clear Data</span>
 
     </button>
-    <button class="tab" type="submit" name="">
+    <button class="tab" type="submit" name="privacy">
         <?php include './components/svg/deleteAcc.php'?>
-
+        <span>User Privacy</span>
     </button>
-    <button class="tab" type="submit" name="">
+    <button class="tab" type="submit" name="blocked">
         <?php include './components/svg/deleteAcc.php'?>
-
+        <span>
+            Blocked Users
+        </span>
     </button>
     <button class="tab" type="submit" name="">
         <?php include './components/svg/deleteAcc.php'?>
@@ -97,6 +99,24 @@
     <form action="" method="POST">
     <h1>Remove User Data</h1>
         <button type="submit" name='clearData'>Clear Data</button>
+    </form>
+
+<?php endif?>
+
+<?php if (isset($_POST['privacy'])): ?>
+
+    <form action="" method="POST">
+    <h1>User Privacy</h1>
+        <button type="submit" name=''>Button</button>
+    </form>
+
+<?php endif?>
+
+<?php if (isset($_POST['blocked'])): ?>
+
+    <form action="" method="POST">
+    <h1>Blocked Users</h1>
+        <button type="submit" name=''>Button</button>
     </form>
 
 <?php endif?>

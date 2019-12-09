@@ -5,7 +5,7 @@
     <?php if (!isset($_POST['friendProfile'])): ?>
     <form action='#' method='POST' class='createPost'>
         <textarea type='text' name='content' placeholder="create a post"></textarea>
-        <input type="file" name="file" accept="image/*">
+
         <input type='submit' name='create-post'>
     </form>
     <?php endif?>
